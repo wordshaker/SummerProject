@@ -231,3 +231,5 @@ $RECYCLE.BIN/
 *.lnk
 *.svn-base
 .svn/entries
+.svn/format
+Framework/Properties/DataSources/Framework.cs.Repositories.MemoryDataRepository.datasource
