@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{804232D1-7B7E-496E-BEC7-2FB93BCC3452}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Framework.Tests</RootNamespace>
+    <AssemblyName>Framework.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Accord">
+      <HintPath>..\packages\Accord.2.15.0\lib\net45\Accord.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.MachineLearning.GPL">
+      <HintPath>..\packages\Accord.MachineLearning.GPL.2.15.0\lib\net45\Accord.MachineLearning.GPL.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Math">
+      <HintPath>..\packages\Accord.Math.2.15.0\lib\net45\Accord.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Accord.Statistics">
+      <HintPath>..\packages\Accord.Statistics.2.15.0\lib\net45\Accord.Statistics.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge">
+      <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math">
+      <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Belief State\ActivationTests.cs" />
+    <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
+    <Compile Include="Belief State\BeliefStateTests.cs" />
+    <Compile Include="DataRecorders\MemoryDataRepositoryTests.cs" />
+    <Compile Include="DataRecorders\ActivationDataRepositoryTests.cs" />
+    <Compile Include="Actors\RandomActorTests.cs" />
+    <Compile Include="ExperimentTests.cs" />
+    <Compile Include="IPOMDPTrialRunnerTests.cs" />
+    <Compile Include="Observation\ObservationGenerationModelTests.cs" />
+    <Compile Include="Observation\ObservableModelGenerateTests.cs" />
+    <Compile Include="Observation\ObservableModelUpdateTests.cs" />
+    <Compile Include="TrialRunners\BubbleAnalysisRunnerTests.cs" />
+    <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
+    <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />
+    <Compile Include="TrialRunners\RandomBeliefTrialRunnerTests.cs" />
+    <Compile Include="VisualArrayGeneratorTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.csproj">
+      <Project>{864690eb-97b5-4233-a5e3-32cab71459ec}</Project>
+      <Name>Framework</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
