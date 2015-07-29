@@ -13,13 +13,16 @@ namespace Framework
     {
         public static MemoryDataRepository Repository;
         public static ActivationDataRepository ActivationRepository;
+        public static BeliefStateDataRepository BeliefStateRepository;
 
         static FrameworkFactory()
         {
             Repository = new MemoryDataRepository();
             ActivationRepository = new ActivationDataRepository();
+            BeliefStateRepository = new BeliefStateDataRepository();
         }
 
+        //Experiments
         public static Experiment CreateRandomExperiment()
         {
             var trialRunner = CreateRandomTrialRunner();
@@ -32,6 +35,25 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
+        public static Experiment CreateRandomBeliefExperiment()
+        {
+            var trialRunner = CreateRandomBeliefTrialRunner();
+            return new Experiment(trialRunner);
+        }        
+        
+        public static Experiment CreateRandomBeliefBubbleChartExperiment()
+        {
+            var trialRunner = CreateRandomBeliefBubbleChartTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+        public static Experiment CreateRandomBeliefBeliefStateAnalysisExperiment()
+        {
+            var trialRunner = CreateRandomBeliefBeliefStateAnalysisTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+        //Trial Runners
         private static ITrialRunner CreateRandomTrialRunner()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
@@ -44,6 +66,25 @@ namespace Framework
             return new RandomBasicTrialRunnerWithExclusion(visualArrayGenerator, CreateRandomActor, Repository);
         }
 
+        private static ITrialRunner CreateRandomBeliefTrialRunner()
+        {
+            var observableModel = CreateObservableModel();
+            return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
+        }        
+        
+        private static ITrialRunner CreateRandomBeliefBubbleChartTrialRunner()
+        {
+            var observableBubbleModel = CreateBubbleObserverModel();
+            return new BubbleAnalysisRunner(observableBubbleModel, CreateRandomActor);
+        }
+
+        private static ITrialRunner CreateRandomBeliefBeliefStateAnalysisTrialRunner()
+        {
+            var observableBubbleModel = CreateBeliefStateObserverModel();
+            return new BubbleAnalysisRunner(observableBubbleModel, CreateRandomActor);
+        }
+
+        //Utilities
         private static IActor CreateRandomActor()
         {
             var randomNumberProvider = new ZeroToSixRandomNumberProvider();
@@ -54,18 +95,6 @@ namespace Framework
         {
             var randomNumberProvider = new ZeroToSixRandomNumberProvider();
             return new VisualArrayGenerator(randomNumberProvider);
-        }
-
-        public static Experiment CreateRandomBeliefExperiment()
-        {
-            var trialRunner = CreateRandomBeliefTrialRunner();
-            return new Experiment(trialRunner);
-        }
-
-        private static ITrialRunner CreateRandomBeliefTrialRunner()
-        {
-            var observableModel = CreateObservableModel();
-            return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
         }
 
         private static IObservableModel CreateObservableModel()
@@ -80,23 +109,20 @@ namespace Framework
             return new Activation(NormalDistribution.Standard);
         }
 
-        public static Experiment CreateRandomBeliefBubbleChartExperiment()
-        {
-            var trialRunner = CreateRandomBeliefBubbleChartTrialRunner();
-            return new Experiment(trialRunner);
-        }
-
-        private static ITrialRunner CreateRandomBeliefBubbleChartTrialRunner()
-        {
-            var obsevableBubbleModel = CreateBubbleOberserModel();
-            return new BubbleAnalysisRunner(obsevableBubbleModel, CreateRandomActor);
-        }
-
-        private static IObservableBubbleModel CreateBubbleOberserModel()
+        private static IObservableBubbleModel CreateBubbleObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefState(), activation, ActivationRepository);
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefState(), activation,
+                ActivationRepository);
+        }
+
+        private static IObservableBubbleModel CreateBeliefStateObserverModel()
+        {
+            var visualArrayGenerator = CreateVisualArrayGenerator();
+            var activation = CreateActivation();
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository), activation,
+                ActivationRepository);
         }
     }
 }

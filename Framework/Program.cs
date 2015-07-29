@@ -9,7 +9,8 @@ namespace Framework
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Analysis());
-            Application.Run(new BubbleChartAnalysis());
+            //Application.Run(new ActivationAnalysis());
+            Application.Run(new BeliefStateAnalysis());
         }
     }
 }

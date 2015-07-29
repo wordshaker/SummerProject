@@ -45,6 +45,9 @@
     <Reference Include="AForge">
       <HintPath>..\packages\AForge.2.2.5\lib\AForge.dll</HintPath>
     </Reference>
+    <Reference Include="AForge.MachineLearning">
+      <HintPath>..\packages\portable.aforge.machinelearning.2.2.5.50513\lib\portable-net45+netcore45+wpa81\AForge.MachineLearning.dll</HintPath>
+    </Reference>
     <Reference Include="AForge.Math">
       <HintPath>..\packages\AForge.Math.2.2.5\lib\AForge.Math.dll</HintPath>
     </Reference>
@@ -54,6 +57,9 @@
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Shim">
+      <HintPath>..\packages\shim.1.0.1.50427\lib\net45\Shim.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,7 +67,9 @@
   <ItemGroup>
     <Compile Include="Belief State\ActivationTests.cs" />
     <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
+    <Compile Include="Belief State\BeliefStateForAnalysisTest.cs" />
     <Compile Include="Belief State\BeliefStateTests.cs" />
+    <Compile Include="DataRecorders\BeliefStateDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\MemoryDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\ActivationDataRepositoryTests.cs" />
     <Compile Include="Actors\RandomActorTests.cs" />
@@ -70,7 +78,6 @@
     <Compile Include="Observation\ObservationGenerationModelTests.cs" />
     <Compile Include="Observation\ObservableModelGenerateTests.cs" />
     <Compile Include="Observation\ObservableModelUpdateTests.cs" />
-    <Compile Include="TrialRunners\BubbleAnalysisRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunnerTests.cs" />

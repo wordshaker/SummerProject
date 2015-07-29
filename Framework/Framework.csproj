@@ -61,6 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Belief State\BeliefStateForAnalysis.cs" />
+    <Compile Include="BeliefStateAnalysis.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BeliefStateAnalysis.Designer.cs">
+      <DependentUpon>BeliefStateAnalysis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\BeliefStateDataRepository.cs" />
     <Compile Include="Data\ActivationDataRepository.cs" />
     <Compile Include="Actors\IActor.cs" />
     <Compile Include="Analysis.cs">
@@ -73,11 +81,11 @@
     <Compile Include="Belief State\BeliefState.cs" />
     <Compile Include="Belief State\IActivation.cs" />
     <Compile Include="Belief State\IBeliefState.cs" />
-    <Compile Include="BubbleChartAnalysis.cs">
+    <Compile Include="ActivationAnalysis.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BubbleChartAnalysis.Designer.cs">
-      <DependentUpon>BubbleChartAnalysis.cs</DependentUpon>
+    <Compile Include="ActivationAnalysis.Designer.cs">
+      <DependentUpon>ActivationAnalysis.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\IBubbleDataReader.cs" />
     <Compile Include="Data\IBubbleDataRecorder.cs" />
@@ -107,11 +115,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="BeliefStateAnalysis.resx">
+      <DependentUpon>BeliefStateAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Analysis.resx">
       <DependentUpon>Analysis.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BubbleChartAnalysis.resx">
-      <DependentUpon>BubbleChartAnalysis.cs</DependentUpon>
+    <EmbeddedResource Include="ActivationAnalysis.resx">
+      <DependentUpon>ActivationAnalysis.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

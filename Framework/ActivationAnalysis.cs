@@ -6,9 +6,9 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Framework
 {
-    public partial class BubbleChartAnalysis : Form
+    public partial class ActivationAnalysis : Form
     {
-        public BubbleChartAnalysis()
+        public ActivationAnalysis()
         {
             InitializeComponent();
         }

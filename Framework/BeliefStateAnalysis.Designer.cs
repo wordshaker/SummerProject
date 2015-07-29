@@ -1,6 +1,6 @@
 ﻿namespace Framework
 {
-    partial class BubbleChartAnalysis
+    partial class BeliefStateAnalysis
     {
         /// <summary>
         /// Required designer variable.
@@ -55,14 +55,14 @@
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // BubbleChartAnalysis
+            // BeliefStateAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1235, 753);
+            this.ClientSize = new System.Drawing.Size(1292, 810);
             this.Controls.Add(this.chart1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.Name = "BubbleChartAnalysis";
+            this.Name = "BeliefStateAnalysis";
             this.Text = "BubbleChartAnalysis";
             this.Load += new System.EventHandler(this.BubbleChartAnalysis_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();

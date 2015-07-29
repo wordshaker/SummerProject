@@ -26,7 +26,7 @@ namespace Framework.Tests.DataRecorders
         [Test]
         public void ThenTheDictionaryHasTheExpectedAmountOfKeys()
         {
-            Assert.That(_activationsPerFixation.Keys.Count, Is.EqualTo(7));
+            Assert.That(_activationsPerFixation.Keys.Count, Is.EqualTo(1));
         }
 
         [Test]
@@ -45,37 +45,55 @@ namespace Framework.Tests.DataRecorders
     [TestFixture]
     public class ActivationDataRepositoryWithDuplicateInsertsTests
     {
-        private double[] _activations;
+        private double[] _activationsOne;
         private IDictionary<int, double[]> _activationsPerFixation;
-        private int _fixation;
+        private int _fixationOne;
+        private int _fixationTwo;
+        private double[] _activationsTwo;
 
         [TestFixtureSetUp]
         public void WhenDataIsRecordedAndGetDataIsCalled()
         {
-            _fixation = 1;
-            _activations = new[] {0.75, 0.9, 0.75, 0.25, 0.1, 0.0, 0.0};
+            _fixationOne = 1;
+            _fixationTwo = 2;
+            _activationsOne = new[] {0.6, 0.8, 0.6, 0.1, 0.1, 0.0, 0.0};
+            _activationsTwo = new[] { 0.75, 0.9, 0.75, 0.25, 0.1, 0.0, 0.0 };
+
 
             var activationDataRecorder = new ActivationDataRepository();
-            activationDataRecorder.Insert(_fixation, _activations);
+            activationDataRecorder.Insert(_fixationOne, _activationsOne);
+            activationDataRecorder.Insert(_fixationTwo, _activationsTwo);
             _activationsPerFixation = activationDataRecorder.GetData();
         }
 
         [Test]
-        public void ThenDictionaryContainsTheExpectedKey()
+        public void ThenDictionaryContainsTheExpectedFirstKey()
         {
-            Assert.That(_activationsPerFixation.ContainsKey(_fixation));
+            Assert.That(_activationsPerFixation.ContainsKey(_fixationOne));
         }
 
         [Test]
-        public void ThenDictionaryHasTheExpectedValue()
+        public void ThenDictionaryContainsTheExpectedSecondKey()
         {
-            Assert.That(_activationsPerFixation[_fixation], Is.EqualTo(_activations));
+            Assert.That(_activationsPerFixation.ContainsKey(_fixationTwo));
+        }
+
+        [Test]
+        public void ThenDictionaryHasTheExpectedValueForFirstFixation()
+        {
+            Assert.That(_activationsPerFixation[_fixationOne], Is.EqualTo(_activationsOne));
+        }
+
+        [Test]
+        public void ThenDictionaryHasTheExpectedValueForSecondFixation()
+        {
+            Assert.That(_activationsPerFixation[_fixationTwo], Is.EqualTo(_activationsTwo));
         }
 
         [Test]
         public void ThenDictionaryWithTwoEntriesHasExpectedNumberOfKeys()
         {
-            Assert.That(_activationsPerFixation.Count, Is.EqualTo(7));
+            Assert.That(_activationsPerFixation.Count, Is.EqualTo(2));
         }
     }
 }

@@ -6,6 +6,7 @@ using Framework.TrialRunners;
 using Framework.VisualArray;
 using Moq;
 using NUnit.Framework;
+using AForge.MachineLearning;
 
 namespace Framework.Tests
 {
@@ -92,6 +93,7 @@ namespace Framework.Tests
             {
                 fixationLocation = intelligentActor.Fixate();
             } while (_observableModel.Update(fixationLocation) == false);
+
         }
     }
 }
