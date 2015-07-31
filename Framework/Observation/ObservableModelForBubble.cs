@@ -4,7 +4,7 @@ using Framework.VisualArray;
 
 namespace Framework.Observation
 {
-    public class ObservableModelForBubble : IObservableBubbleModel
+    public class ObservableModelForBubble : IObservableModel, IMapObservableModel
     {
         private readonly IActivation _activation;
         private readonly IBubbleDataRecorder _activationDataRecorder;
@@ -29,6 +29,12 @@ namespace Framework.Observation
             _beliefState.Initialise();
         }
 
+        public double[] GetState(int fixation)
+        {
+            var activation = _activation.GenerateActivation(fixation, _visualArray);
+            return _beliefState.CalculateState(activation, fixation);
+        }
+
         public bool Update(int fixation)
         {
             ++_numberOfFixation;
@@ -36,11 +42,5 @@ namespace Framework.Observation
             _activationDataRecorder.Insert(_numberOfFixation, activation);
             return _beliefState.Update(activation, fixation);
         }
-    }
-
-    public interface IObservableBubbleModel
-    {
-        void Generate();
-        bool Update(int fixation);
     }
 }

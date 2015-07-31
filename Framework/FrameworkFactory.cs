@@ -49,13 +49,19 @@ namespace Framework
 
         public static Experiment CreateRandomBeliefBubbleChartExperiment()
         {
-            var trialRunner = CreateRandomBeliefBubbleChartTrialRunner();
+            var trialRunner = CreateRandomBeliefActivationChartTrialRunner();
             return new Experiment(trialRunner);
         }
 
         public static Experiment CreateRandomBeliefBeliefStateAnalysisExperiment()
         {
             var trialRunner = CreateRandomBeliefBeliefStateAnalysisTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+        public static Experiment CreateMapBeliefStateAnalysisExperiment()
+        {
+            var trialRunner = CreateMapBeliefStateAnalysisTrialRunner();
             return new Experiment(trialRunner);
         }
 
@@ -81,19 +87,25 @@ namespace Framework
         private static ITrialRunner CreateMapTrialRunner()
         {
             var observableModel = CreateIMapObservableModel();
-            return new MapTrialRunner(observableModel,CreateRandomActor);
+            return new MapTrialRunner(observableModel, CreateRandomActor);
         }
 
-        private static ITrialRunner CreateRandomBeliefBubbleChartTrialRunner()
+        private static ITrialRunner CreateRandomBeliefActivationChartTrialRunner()
         {
-            var observableBubbleModel = CreateBubbleObserverModel();
-            return new BubbleAnalysisRunner(observableBubbleModel, CreateRandomActor);
+            var observableActivationModel = CreateBubbleObserverModel();
+            return new BubbleAnalysisRunner(observableActivationModel, CreateRandomActor);
         }
 
         private static ITrialRunner CreateRandomBeliefBeliefStateAnalysisTrialRunner()
         {
-            var observableBubbleModel = CreateBeliefStateObserverModel();
-            return new BubbleAnalysisRunner(observableBubbleModel, CreateRandomActor);
+            var observableBeliefModel = CreateBeliefStateObserverModel();
+            return new BubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
+        }
+
+        private static ITrialRunner CreateMapBeliefStateAnalysisTrialRunner()
+        {
+            var observableBeliefModel = CreateMapBeliefStateObservableModel();
+            return new MapBubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
         }
 
         //Utilities
@@ -128,7 +140,7 @@ namespace Framework
             return new Activation(NormalDistribution.Standard);
         }
 
-        private static IObservableBubbleModel CreateBubbleObserverModel()
+        private static IObservableModel CreateBubbleObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
@@ -136,7 +148,16 @@ namespace Framework
                 ActivationRepository);
         }
 
-        private static IObservableBubbleModel CreateBeliefStateObserverModel()
+        private static IMapObservableModel CreateMapBeliefStateObservableModel()
+        {
+            var visualArrayGenerator = CreateVisualArrayGenerator();
+            var activation = CreateActivation();
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository),
+                activation,
+                ActivationRepository);
+        }
+
+        private static IObservableModel CreateBeliefStateObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();

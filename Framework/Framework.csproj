@@ -89,6 +89,7 @@
     <Compile Include="Data\IBubbleDataReader.cs" />
     <Compile Include="Data\IBubbleDataRecorder.cs" />
     <Compile Include="Experiment.cs" />
+    <Compile Include="MapBubbleAnalysisRunner.cs" />
     <Compile Include="Observation\IMapObservableModel.cs" />
     <Compile Include="Observation\IObservableModel.cs" />
     <Compile Include="Observation\ObservableModelForBubble.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Data\MemoryDataRepository.cs" />
     <Compile Include="FrameworkFactory.cs" />
     <Compile Include="TrialRunners\BubbleAnalysisRunner.cs" />
+    <Compile Include="TrialRunners\IMapTrialRunner.cs" />
     <Compile Include="TrialRunners\ITrialRunner.cs" />
     <Compile Include="TrialRunners\MapTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusion.cs" />

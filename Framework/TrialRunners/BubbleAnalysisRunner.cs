@@ -8,9 +8,9 @@ namespace Framework.TrialRunners
     public class BubbleAnalysisRunner : ITrialRunner
     {
         private readonly Func<IActor> _actorProvider;
-        private readonly IObservableBubbleModel _observableModel;
+        private readonly IObservableModel _observableModel;
 
-        public BubbleAnalysisRunner(IObservableBubbleModel observableModel, Func<IActor> actorProvider)
+        public BubbleAnalysisRunner(IObservableModel observableModel, Func<IActor> actorProvider)
         {
             _observableModel = observableModel;
             _actorProvider = actorProvider;

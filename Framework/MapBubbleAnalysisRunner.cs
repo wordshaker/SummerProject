@@ -2,16 +2,17 @@ using System;
 using System.Linq;
 using Framework.Actors;
 using Framework.Observation;
+using Framework.TrialRunners;
 
-namespace Framework.TrialRunners
+namespace Framework
 {
-    public class MapTrialRunner : ITrialRunner, IMapTrialRunner 
+    public class MapBubbleAnalysisRunner : ITrialRunner, IMapTrialRunner
     {
-        private readonly Func<IActor> _actorProvider;
         private readonly IMapObservableModel _observableModel;
         private double[] _state;
+        private readonly Func<IActor> _actorProvider;
 
-        public MapTrialRunner(IMapObservableModel observableModel, Func<IActor> actorProvider)
+        public MapBubbleAnalysisRunner(IMapObservableModel observableModel, Func<IActor> actorProvider)
         {
             _observableModel = observableModel;
             _actorProvider = actorProvider;
