@@ -41,6 +41,12 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
+        public static Experiment CreateMAPExperiment()
+        {
+            var trialRunner = CreateMapTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
         public static Experiment CreateRandomBeliefBubbleChartExperiment()
         {
             var trialRunner = CreateRandomBeliefBubbleChartTrialRunner();
@@ -72,6 +78,12 @@ namespace Framework
             return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
         }
 
+        private static ITrialRunner CreateMapTrialRunner()
+        {
+            var observableModel = CreateIMapObservableModel();
+            return new MapTrialRunner(observableModel,CreateRandomActor);
+        }
+
         private static ITrialRunner CreateRandomBeliefBubbleChartTrialRunner()
         {
             var observableBubbleModel = CreateBubbleObserverModel();
@@ -98,6 +110,13 @@ namespace Framework
         }
 
         private static IObservableModel CreateObservableModel()
+        {
+            var visualArrayGenerator = CreateVisualArrayGenerator();
+            var activation = CreateActivation();
+            return new ObservableModel(visualArrayGenerator, new BeliefState(), activation);
+        }
+
+        private static IMapObservableModel CreateIMapObservableModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();

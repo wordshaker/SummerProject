@@ -3,7 +3,7 @@ using Framework.VisualArray;
 
 namespace Framework.Observation
 {
-    public class ObservableModel : IObservableModel
+    public class ObservableModel : IObservableModel, IMapObservableModel
     {
         private readonly IActivation _activation;
         private readonly IBeliefState _beliefState;
@@ -16,6 +16,12 @@ namespace Framework.Observation
             _visualArrayGenerator = visualArrayGenerator;
             _beliefState = beliefState;
             _activation = activation;
+        }
+
+        public double[] GetState(int fixation)
+        {
+            var activation = _activation.GenerateActivation(fixation, _visualArray);
+            return _beliefState.CalculateState(activation, fixation);
         }
 
         public void Generate()

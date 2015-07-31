@@ -41,5 +41,10 @@ namespace Framework.Belief_State
             _beliefStateDataRecorder.Insert(_numberOfFixation, State);
             return State.Any(s => s >= 0.9);
         }
+
+        public double[] CalculateState(double[] activation, int fixation)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

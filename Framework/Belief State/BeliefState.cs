@@ -29,5 +29,17 @@ namespace Framework.Belief_State
             }
             return State.Any(s => s >= 0.9);
         }
+
+        public double[] CalculateState(double[] activation, int fixation)
+        {
+            for (var i = 0; i < 7; i++)
+            {
+                var discriminability =
+                    new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)
+                        .GenerateDiscriminabilityValue();
+                State[i] = State[i]*Math.Exp(activation[i]*discriminability);
+            }
+            return State;
+        }
     }
 }

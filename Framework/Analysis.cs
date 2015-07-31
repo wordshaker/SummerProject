@@ -15,8 +15,10 @@ namespace Framework
         {
             //var experiment = FrameworkFactory.CreateRandomExperiment();
             //var experiment = FrameworkFactory.CreateRandomExclusionExperiment();
-            var experiment = FrameworkFactory.CreateRandomBeliefExperiment();
-            experiment.RunTrials(1000000);
+            //var experiment = FrameworkFactory.CreateRandomBeliefExperiment();
+            var experiment = FrameworkFactory.CreateMAPExperiment();
+
+            experiment.RunTrials(1000);
 
             var dictionary = FrameworkFactory.Repository.GetData();
 
