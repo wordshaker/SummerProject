@@ -8,18 +8,18 @@ namespace Framework.Belief_State
 {
     public class BeliefStateForAnalysis : IBeliefState
     {
-        private NormalDistribution _foveaPeripheryOperatingCharacteristic;
-        public double[] State { get; private set; }
-        public int[] VisualArray { get; private set; }
         private readonly IBubbleDataRecorder _beliefStateDataRecorder;
-        private int _numberOfFixation;            
-
+        private NormalDistribution _foveaPeripheryOperatingCharacteristic;
+        private int _numberOfFixation;
 
         public BeliefStateForAnalysis(IBubbleDataRecorder beliefStateDataRecorder)
         {
             _beliefStateDataRecorder = beliefStateDataRecorder;
             _numberOfFixation = 0;
         }
+
+        public double[] State { get; private set; }
+        public int[] VisualArray { get; private set; }
 
         public void Initialise()
         {
@@ -31,7 +31,6 @@ namespace Framework.Belief_State
         public bool Update(double[] activation, int fixation)
         {
             ++ _numberOfFixation;
-
             for (var i = 0; i < 7; i++)
             {
                 var discriminability =

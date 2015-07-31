@@ -26,15 +26,15 @@ namespace Framework.TrialRunners
             var actor = _actorProvider();
             var fixations = 0;
             int fixationLocation;
-            List<int> visited = new List<int>();
-            
+            var visited = new List<int>();
+
             do
             {
                 fixationLocation = actor.Fixate();
                 if (visited.Contains(fixationLocation)) continue;
                 fixations++;
                 visited.Add(fixationLocation);
-            } while ( _observableModel.Update(fixationLocation) == false);
+            } while (_observableModel.Update(fixationLocation) == false);
 
             _recorder.Insert(fixations);
         }

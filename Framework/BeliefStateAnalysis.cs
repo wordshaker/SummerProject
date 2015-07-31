@@ -18,7 +18,7 @@ namespace Framework
             var experiment = FrameworkFactory.CreateRandomBeliefBeliefStateAnalysisExperiment();
             experiment.RunTrials(1);
 
-            var dictionary = FrameworkFactory.BeliefStateRepository.GetData();
+            var dictionary = FrameworkFactory.ActivationRepository.GetData();
             var series = new Series("Belief States");
             chart1.Series.Clear();
             series.ChartType = SeriesChartType.Bubble;
@@ -36,27 +36,16 @@ namespace Framework
                 series.Points.AddXY(6, kvp.Key, kvp.Value[6]);
             }
 
-            foreach (var point in series.Points.Where(p => p.YValues[1] < 0.7 && p.YValues[1] > 0.5))
-            {
-                point.Color = Color.DarkCyan;
-            }
-
-            foreach (var point in series.Points.Where(p => p.YValues[1] < 0.5 && p.YValues[1] > 0.1))
-            {
-                point.Color = Color.OrangeRed;
-            }
-
-            foreach (var point in series.Points.Where(p => p.YValues[1] < 0.0))
+            foreach (var point in series.Points.Where(p => p.YValues[1] < 0.9))
             {
                 point.Color = Color.Crimson;
             }
-            
+
             chart1.ChartAreas[0].AxisY.Title = "Fixation";
             chart1.ChartAreas[0].AxisX.Title = "Location in Visual Array";
             chart1.ChartAreas[0].AxisY2.Title = "Belief";
 
             chart1.Titles.Add("Belief State for each location in the visual array across trials.");
         }
-
     }
 }

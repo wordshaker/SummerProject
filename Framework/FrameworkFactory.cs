@@ -12,14 +12,14 @@ namespace Framework
     public static class FrameworkFactory
     {
         public static MemoryDataRepository Repository;
-        public static ActivationDataRepository ActivationRepository;
-        public static BeliefStateDataRepository BeliefStateRepository;
+        public static AnalysisDataRepository ActivationRepository;
+        public static AnalysisDataRepository BeliefStateRepository;
 
         static FrameworkFactory()
         {
             Repository = new MemoryDataRepository();
-            ActivationRepository = new ActivationDataRepository();
-            BeliefStateRepository = new BeliefStateDataRepository();
+            ActivationRepository = new AnalysisDataRepository();
+            BeliefStateRepository = new AnalysisDataRepository();
         }
 
         //Experiments
@@ -39,8 +39,8 @@ namespace Framework
         {
             var trialRunner = CreateRandomBeliefTrialRunner();
             return new Experiment(trialRunner);
-        }        
-        
+        }
+
         public static Experiment CreateRandomBeliefBubbleChartExperiment()
         {
             var trialRunner = CreateRandomBeliefBubbleChartTrialRunner();
@@ -70,8 +70,8 @@ namespace Framework
         {
             var observableModel = CreateObservableModel();
             return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
-        }        
-        
+        }
+
         private static ITrialRunner CreateRandomBeliefBubbleChartTrialRunner()
         {
             var observableBubbleModel = CreateBubbleObserverModel();
@@ -121,7 +121,8 @@ namespace Framework
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository), activation,
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository),
+                activation,
                 ActivationRepository);
         }
     }

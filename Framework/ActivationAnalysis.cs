@@ -35,18 +35,17 @@ namespace Framework
                 series.Points.AddXY(5, kvp.Key, kvp.Value[5]);
                 series.Points.AddXY(6, kvp.Key, kvp.Value[6]);
             }
-            
+
             foreach (var point in series.Points.Where(p => p.YValues[1] < 0))
             {
                 point.Color = Color.Crimson;
             }
-            
+
             chart1.ChartAreas[0].AxisY.Title = "Fixation";
             chart1.ChartAreas[0].AxisX.Title = "Location in Visual Array";
             chart1.ChartAreas[0].AxisY2.Title = "Activity";
 
             chart1.Titles.Add("Activations for each location in the visual array across trials.");
         }
-
     }
 }

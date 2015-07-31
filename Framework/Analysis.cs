@@ -25,7 +25,7 @@ namespace Framework
             chart1.Series.Add(series);
             chart1.Series["No. Fixations Across Trials"].Points.DataBindXY(dictionary.Keys, dictionary.Values);
             chart1.ChartAreas[0].AxisX.Title = "No. Of Fixations";
-            chart1.ChartAreas[0].AxisY.Title = "Total Trials";  
+            chart1.ChartAreas[0].AxisY.Title = "Total Trials";
             chart1.ChartAreas[0].AxisX.Maximum = 7;
             //chart1.ChartAreas[0].AxisY.Maximum = 350;
 

@@ -69,15 +69,14 @@
     <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysisTest.cs" />
     <Compile Include="Belief State\BeliefStateTests.cs" />
-    <Compile Include="DataRecorders\BeliefStateDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\MemoryDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\ActivationDataRepositoryTests.cs" />
     <Compile Include="Actors\RandomActorTests.cs" />
     <Compile Include="ExperimentTests.cs" />
-    <Compile Include="IPOMDPTrialRunnerTests.cs" />
     <Compile Include="Observation\ObservationGenerationModelTests.cs" />
     <Compile Include="Observation\ObservableModelGenerateTests.cs" />
     <Compile Include="Observation\ObservableModelUpdateTests.cs" />
+    <Compile Include="TrialRunners\MapTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunnerTests.cs" />

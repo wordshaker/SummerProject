@@ -7,11 +7,11 @@ namespace Framework.Observation
     public class ObservableModelForBubble : IObservableBubbleModel
     {
         private readonly IActivation _activation;
+        private readonly IBubbleDataRecorder _activationDataRecorder;
         private readonly IBeliefState _beliefState;
         private readonly IVisualArrayGenerator _visualArrayGenerator;
-        private int[] _visualArray;
-        private readonly IBubbleDataRecorder _activationDataRecorder;
         private int _numberOfFixation;
+        private int[] _visualArray;
 
         public ObservableModelForBubble(IVisualArrayGenerator visualArrayGenerator, IBeliefState beliefState,
             IActivation activation, IBubbleDataRecorder activationDataRecorder)

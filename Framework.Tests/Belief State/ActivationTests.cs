@@ -9,11 +9,12 @@ namespace Framework.Tests.Belief_State
     internal class ActivationTests
     {
         private Mock<NormalDistribution> _foveaPeripheryOperatingCharacteristic;
+
         [TestFixtureSetUp]
         public void WhenInitialisingObservationArray()
         {
             _foveaPeripheryOperatingCharacteristic = new Mock<NormalDistribution>();
-            
+
             var fixation = 0;
             var visualArray = new[] {1, 0, 0, 0, 0, 0, 0};
             var activationValues = new Activation(_foveaPeripheryOperatingCharacteristic.Object);
@@ -21,15 +22,15 @@ namespace Framework.Tests.Belief_State
         }
 
         [Test]
-        public void ThenNormalDistributionIsCalledOnNonTargets()
-        {
-            _foveaPeripheryOperatingCharacteristic.Verify(f => f.Generate(), Times.Exactly(6));
-        }
-
-        [Test]
         public void ThenActivityGaussianIsCalledOnTarget()
         {
             _foveaPeripheryOperatingCharacteristic.Verify(f => f.Generate());
+        }
+
+        [Test]
+        public void ThenNormalDistributionIsCalledOnNonTargets()
+        {
+            _foveaPeripheryOperatingCharacteristic.Verify(f => f.Generate(), Times.Exactly(6));
         }
     }
 }

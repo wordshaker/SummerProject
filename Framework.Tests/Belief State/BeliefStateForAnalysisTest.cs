@@ -1,4 +1,6 @@
 ﻿using Framework.Belief_State;
+using Framework.Data;
+using Moq;
 using NUnit.Framework;
 
 namespace Framework.Tests.Belief_State
@@ -9,10 +11,12 @@ namespace Framework.Tests.Belief_State
     {
         private readonly bool _expectedResult;
         private readonly double[] _activation;
-        private BeliefState _beliefState;
+        private IBeliefState _beliefState;
         private bool _result;
+        private IBubbleDataRecorder _beliefStateRecorder;
 
-        public BeliefStateForAnalysisUpdateTests(bool expectedResult, double first, double second, double third, double fourth,
+        public BeliefStateForAnalysisUpdateTests(bool expectedResult, double first, double second, double third,
+            double fourth,
             double fifth, double sixth, double seventh)
         {
             _expectedResult = expectedResult;
@@ -23,9 +27,9 @@ namespace Framework.Tests.Belief_State
         [TestFixtureSetUp]
         public void WhenUpdating()
         {
-            _beliefState = new BeliefState();
+            _beliefStateRecorder = new AnalysisDataRepository();
+            _beliefState = new BeliefStateForAnalysis(_beliefStateRecorder);
             _beliefState.Initialise();
-
             _result = _beliefState.Update(_activation, 1);
         }
 
@@ -33,6 +37,26 @@ namespace Framework.Tests.Belief_State
         public void ThenTheResultIsTheExpectedResult()
         {
             Assert.That(_result, Is.EqualTo(_expectedResult));
+        }
+    }
+
+    public class BeliefStateForAnalysisRecorderTests
+    {
+        private double[] _activation;
+        private IBeliefState _beliefState;
+        private Mock<IBubbleDataRecorder> _beliefStateRecorder;
+        private bool _result;
+
+        [TestFixtureSetUp]
+        public void WhenUpdating()
+        {
+            _activation = new[] {0.75, 1.9, 0.75, 0.25, 0.25, 0.25, 0.25};
+            _beliefStateRecorder = new Mock<IBubbleDataRecorder>();
+
+
+            _beliefState = new BeliefStateForAnalysis(_beliefStateRecorder.Object);
+            _beliefState.Initialise();
+            _result = _beliefState.Update(_activation, 1);
         }
     }
 }

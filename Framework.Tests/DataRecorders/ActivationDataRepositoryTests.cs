@@ -18,7 +18,7 @@ namespace Framework.Tests.DataRecorders
             _fixation = 0;
             _activations = new[] {0.75, 0.9, 0.75, 0.25, 0.1, 0.0, 0.0};
 
-            var activationDataRecorder = new ActivationDataRepository();
+            var activationDataRecorder = new AnalysisDataRepository();
             activationDataRecorder.Insert(_fixation, _activations);
             _activationsPerFixation = activationDataRecorder.GetData();
         }
@@ -57,10 +57,10 @@ namespace Framework.Tests.DataRecorders
             _fixationOne = 1;
             _fixationTwo = 2;
             _activationsOne = new[] {0.6, 0.8, 0.6, 0.1, 0.1, 0.0, 0.0};
-            _activationsTwo = new[] { 0.75, 0.9, 0.75, 0.25, 0.1, 0.0, 0.0 };
+            _activationsTwo = new[] {0.75, 0.9, 0.75, 0.25, 0.1, 0.0, 0.0};
 
 
-            var activationDataRecorder = new ActivationDataRepository();
+            var activationDataRecorder = new AnalysisDataRepository();
             activationDataRecorder.Insert(_fixationOne, _activationsOne);
             activationDataRecorder.Insert(_fixationTwo, _activationsTwo);
             _activationsPerFixation = activationDataRecorder.GetData();
