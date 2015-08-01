@@ -22,140 +22,116 @@ namespace Framework
             BeliefStateRepository = new AnalysisDataRepository();
         }
 
-        //Experiments
+        //Experiments - Basic
         public static Experiment CreateRandomExperiment()
         {
             var trialRunner = CreateRandomTrialRunner();
             return new Experiment(trialRunner);
         }
-
         public static Experiment CreateRandomExclusionExperiment()
         {
             var trialRunner = CreateRandomExclusionTrialRunner();
             return new Experiment(trialRunner);
         }
-
         public static Experiment CreateRandomBeliefExperiment()
         {
             var trialRunner = CreateRandomBeliefTrialRunner();
             return new Experiment(trialRunner);
         }
-
-        public static Experiment CreateMAPExperiment()
+        public static Experiment CreateMapExperiment()
         {
             var trialRunner = CreateMapTrialRunner();
             return new Experiment(trialRunner);
         }
 
-        public static Experiment CreateRandomBeliefBubbleChartExperiment()
+        //Experiments - Activation Analysis
+        public static Experiment CreateRandomBeliefActivationAnalysisExperiment()
         {
             var trialRunner = CreateRandomBeliefActivationChartTrialRunner();
             return new Experiment(trialRunner);
         }
-
+        
+        //Experiments - Belief State Analysis
         public static Experiment CreateRandomBeliefBeliefStateAnalysisExperiment()
         {
             var trialRunner = CreateRandomBeliefBeliefStateAnalysisTrialRunner();
             return new Experiment(trialRunner);
         }
 
-        public static Experiment CreateMapBeliefStateAnalysisExperiment()
-        {
-            var trialRunner = CreateMapBeliefStateAnalysisTrialRunner();
-            return new Experiment(trialRunner);
-        }
-
-        //Trial Runners
+        
+        //Trial Runners - Basic
         private static ITrialRunner CreateRandomTrialRunner()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             return new RandomBasicTrialRunner(visualArrayGenerator, CreateRandomActor, Repository);
         }
-
         private static ITrialRunner CreateRandomExclusionTrialRunner()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             return new RandomBasicTrialRunnerWithExclusion(visualArrayGenerator, CreateRandomActor, Repository);
         }
-
         private static ITrialRunner CreateRandomBeliefTrialRunner()
         {
             var observableModel = CreateObservableModel();
             return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
         }
-
         private static ITrialRunner CreateMapTrialRunner()
         {
-            var observableModel = CreateIMapObservableModel();
-            return new MapTrialRunner(observableModel, CreateRandomActor);
+            var observableModel = CreateMapObservableModel();
+            return new MapTrialRunner(observableModel, CreateRandomActor, Repository);
         }
-
+        
+        //Trial Runners - Activation Analysis
         private static ITrialRunner CreateRandomBeliefActivationChartTrialRunner()
         {
-            var observableActivationModel = CreateBubbleObserverModel();
+            var observableActivationModel = CreateActivationObserverModel();
             return new BubbleAnalysisRunner(observableActivationModel, CreateRandomActor);
         }
 
+        //Trial Runners - Belief State Analysis
         private static ITrialRunner CreateRandomBeliefBeliefStateAnalysisTrialRunner()
         {
             var observableBeliefModel = CreateBeliefStateObserverModel();
             return new BubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
         }
 
-        private static ITrialRunner CreateMapBeliefStateAnalysisTrialRunner()
-        {
-            var observableBeliefModel = CreateMapBeliefStateObservableModel();
-            return new MapBubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
-        }
 
-        //Utilities
+        //Utilities - Basic
         private static IActor CreateRandomActor()
         {
             var randomNumberProvider = new ZeroToSixRandomNumberProvider();
             return new RandomActor(randomNumberProvider);
         }
-
         private static IVisualArrayGenerator CreateVisualArrayGenerator()
         {
             var randomNumberProvider = new ZeroToSixRandomNumberProvider();
             return new VisualArrayGenerator(randomNumberProvider);
         }
-
+        private static IActivation CreateActivation()
+        {
+            return new Activation(NormalDistribution.Standard);
+        }
         private static IObservableModel CreateObservableModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
             return new ObservableModel(visualArrayGenerator, new BeliefState(), activation);
         }
-
-        private static IMapObservableModel CreateIMapObservableModel()
+        private static IMapObservableModel CreateMapObservableModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModel(visualArrayGenerator, new BeliefState(), activation);
+            return new ObservableModelForMap(visualArrayGenerator, new BeliefStateForMap(), activation);
         }
-
-        private static IActivation CreateActivation()
-        {
-            return new Activation(NormalDistribution.Standard);
-        }
-
-        private static IObservableModel CreateBubbleObserverModel()
+        private static IObservableModel CreateActivationObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
             return new ObservableModelForBubble(visualArrayGenerator, new BeliefState(), activation,
                 ActivationRepository);
         }
-
-        private static IMapObservableModel CreateMapBeliefStateObservableModel()
-        {
-            var visualArrayGenerator = CreateVisualArrayGenerator();
-            var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository),
-                activation,
-                ActivationRepository);
-        }
+        
+        //Observable Models - Belief State Analysis
 
         private static IObservableModel CreateBeliefStateObserverModel()
         {

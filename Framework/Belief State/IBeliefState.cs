@@ -4,6 +4,5 @@ namespace Framework.Belief_State
     {
         void Initialise();
         bool Update(double[] activation, int fixation);
-        double[] CalculateState(double[] activation, int fixation);
     }
 }

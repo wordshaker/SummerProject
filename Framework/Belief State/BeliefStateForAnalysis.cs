@@ -6,7 +6,7 @@ using Framework.Observation;
 
 namespace Framework.Belief_State
 {
-    public class BeliefStateForAnalysis : IBeliefState
+    public class BeliefStateForAnalysis : IBeliefState, IBeliefStateForAnalysis
     {
         private readonly IBubbleDataRecorder _beliefStateDataRecorder;
         private NormalDistribution _foveaPeripheryOperatingCharacteristic;
@@ -44,7 +44,14 @@ namespace Framework.Belief_State
 
         public double[] CalculateState(double[] activation, int fixation)
         {
-            throw new NotImplementedException();
+            for (var i = 0; i < 7; i++)
+            {
+                var discriminability =
+                    new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)
+                        .GenerateDiscriminabilityValue();
+                State[i] = State[i] * Math.Exp(activation[i] * discriminability);
+            }
+            return State;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Framework.Actors;
+using Framework.Data;
 using Framework.Observation;
 using Framework.TrialRunners;
 using Moq;
@@ -14,10 +15,13 @@ namespace Framework.Tests.TrialRunners
         private Mock<IMapObservableModel> _observableModel;
         private int _firstFixation;
         private double[] _state;
+        private Mock<IDataRecorder> _dataRecorder;
 
         [TestFixtureSetUp]
         public void WhenInitialisingALearningTrial()
         {
+            _dataRecorder = new Mock<IDataRecorder>();
+
             _firstFixation = 2;
             _state = new[] {0.25, 0.9, 0.25, 0.1, 0.0, 0.0, 0.0};
 
@@ -31,7 +35,7 @@ namespace Framework.Tests.TrialRunners
                 .Setup(o => o.GetState(_firstFixation))
                 .Returns(_state);
 
-            var trial = new MapTrialRunner(_observableModel.Object, () => _intelligentActor.Object);
+            var trial = new MapTrialRunner(_observableModel.Object, () => _intelligentActor.Object, _dataRecorder.Object);
             trial.Run();
         }
 
@@ -52,72 +56,73 @@ namespace Framework.Tests.TrialRunners
         {
             _observableModel.Verify(o => o.GetState(_firstFixation));
         }
+
+        [Test]
+        public void ThenTheRecorderIsCalledWithTheNumberOfFixations()
+        {
+            _dataRecorder.Verify(d => d.Insert(1));
+        }
     }
 
     [TestFixture]
     public class MapTrialRunnerMoreThenOneFixationTests
     {
-        private Mock<IActor> _intelligentActor;
+        private Mock<IActor> _randomActor;
         private Mock<IMapObservableModel> _observableModel;
-        private int _firstFixation;
-        private int _secondFixation;
-        private int _thirdFixation;
-        private double[] _state;
+        private Mock<IDataRecorder> _dataRecorder;
 
         [TestFixtureSetUp]
         public void WhenInitialisingALearningTrial()
         {
-            _firstFixation = 4;
+            _dataRecorder = new Mock<IDataRecorder>();
 
-            _state = new[] {0.25, 0.9, 0.25, 0.1, 0.0, 0.0, 0.0};
+            var firstState = new[] {0.25, 0.35, 0.25, 0.1, 0.4, 0.7, 0.0};
+            var secondState = new[] {0.25, 0.60, 0.25, 0.8, 0.0, 0.0, 0.0};
+            var thirdState = new[] {0.25, 0.9, 0.25, 0.1, 0.0, 0.0, 0.0};
+            var stateQueue = new Queue<double[]>(new[] { firstState, secondState, thirdState });
 
-            var fixationQueue = new Queue<int>(new[] {_firstFixation, _secondFixation, _thirdFixation});
-
-            _intelligentActor = new Mock<IActor>();
-            _intelligentActor
+            _randomActor = new Mock<IActor>();
+            _randomActor
                 .Setup(a => a.Fixate())
-                .Returns(() => fixationQueue.Dequeue());
+                .Returns(4);
 
             _observableModel = new Mock<IMapObservableModel>();
             _observableModel
-                .Setup(o => o.GetState(_thirdFixation))
-                .Returns(_state);
+                .Setup(o => o.GetState(It.IsAny<int>()))
+                .Returns(stateQueue.Dequeue);
 
-            var trial = new MapTrialRunner(_observableModel.Object, () => _intelligentActor.Object);
+            var trial = new MapTrialRunner(_observableModel.Object, () => _randomActor.Object, _dataRecorder.Object);
             trial.Run();
+        }
+
+        [Test]
+        public void ThenTheRandomActorIsUsedForTheFirstFixation()
+        {
+            _randomActor.Verify(a => a.Fixate());
         }
 
         [Test]
         public void ThenTheObservableModelIsUpdatedWithTheFirstFixation()
         {
-            _observableModel.Verify(o => o.GetState(_firstFixation));
+            _observableModel.Verify(o => o.GetState(4));
         }
 
         [Test]
-        public void ThenTheObservableModelIsUpdatedWithTheSEcondFixation()
+        public void ThenTheObservableModelIsUpdatedWithTheSecondFixation()
         {
-            _observableModel.Verify(o => o.GetState(_secondFixation));
+            _observableModel.Verify(o => o.GetState(5));
         }
 
         [Test]
         public void ThenTheObservableModelIsUpdatedWithTheThirdFixation()
         {
-            _observableModel.Verify(o => o.GetState(_thirdFixation));
+            _observableModel.Verify(o => o.GetState(3));
         }
 
         [Test]
-        public void ThenTheSecondFixationIsHighestValueFromTheFirstState()
+        public void ThenTheRecorderIsCalledWithTheNumberOfFixations()
         {
-            var state = _observableModel.Object.GetState(_firstFixation);
-            var indexOfMax = 0;
-            for (var i = 0; i < state.Length - 1; i++)
-            {
-                if (state[i] > state[++i])
-                {
-                    indexOfMax = i;
-                }
-            }
-            Assert.That(_secondFixation, Is.EqualTo(indexOfMax));
+            _dataRecorder.Verify(d => d.Insert(3));
         }
     }
 }

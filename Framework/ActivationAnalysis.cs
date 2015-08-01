@@ -15,7 +15,7 @@ namespace Framework
 
         private void BubbleChartAnalysis_Load(object sender, EventArgs e)
         {
-            var experiment = FrameworkFactory.CreateRandomBeliefBubbleChartExperiment();
+            var experiment = FrameworkFactory.CreateRandomBeliefActivationAnalysisExperiment();
             experiment.RunTrials(1);
 
             var dictionary = FrameworkFactory.ActivationRepository.GetData();

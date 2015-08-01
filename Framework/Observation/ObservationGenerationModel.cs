@@ -1,4 +1,5 @@
-﻿using Accord.Statistics.Distributions.Univariate;
+﻿using System;
+using Accord.Statistics.Distributions.Univariate;
 
 namespace Framework.Observation
 {
@@ -19,8 +20,12 @@ namespace Framework.Observation
 
         public double GenerateDiscriminabilityValue()
         {
-            var distanceFromFixation = _fixation - _location;
-            return _foveaPeripheryOperatingCharacteristic.ProbabilityDensityFunction(distanceFromFixation)*4;
+            var distanceFromFixation = Math.Abs(_fixation - _location);
+            if (distanceFromFixation > 0)
+            {
+                distanceFromFixation--;
+            }
+            return _foveaPeripheryOperatingCharacteristic.ProbabilityDensityFunction(distanceFromFixation)*8;
         }
     }
 }

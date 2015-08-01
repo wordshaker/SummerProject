@@ -61,7 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Belief State\BeliefStateForMap.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysis.cs" />
+    <Compile Include="Belief State\IBeliefStateForAnalysis.cs" />
+    <Compile Include="Belief State\IBeliefStateForMap.cs" />
     <Compile Include="BeliefStateAnalysis.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,9 +92,9 @@
     <Compile Include="Data\IBubbleDataReader.cs" />
     <Compile Include="Data\IBubbleDataRecorder.cs" />
     <Compile Include="Experiment.cs" />
-    <Compile Include="MapBubbleAnalysisRunner.cs" />
     <Compile Include="Observation\IMapObservableModel.cs" />
     <Compile Include="Observation\IObservableModel.cs" />
+    <Compile Include="Observation\ObservableModelForMAP.cs" />
     <Compile Include="Observation\ObservableModelForBubble.cs" />
     <Compile Include="Observation\ObservableModel.cs" />
     <Compile Include="Observation\ObservationGenerationModel.cs" />
@@ -103,6 +106,7 @@
     <Compile Include="TrialRunners\BubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\IMapTrialRunner.cs" />
     <Compile Include="TrialRunners\ITrialRunner.cs" />
+    <Compile Include="TrialRunners\MapBubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\MapTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusion.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunner.cs" />
