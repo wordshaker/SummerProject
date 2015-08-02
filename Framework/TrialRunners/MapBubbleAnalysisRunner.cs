@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Accord.Math;
 using Framework.Actors;
 using Framework.Observation;
 
@@ -9,7 +10,6 @@ namespace Framework.TrialRunners
     {
         private readonly Func<IActor> _actorProvider;
         private readonly IMapObservableModel _observableModel;
-        private double[] _state;
 
         public MapBubbleAnalysisRunner(IMapObservableModel observableModel, Func<IActor> actorProvider)
         {
@@ -17,31 +17,23 @@ namespace Framework.TrialRunners
             _actorProvider = actorProvider;
         }
 
-        public int GetMaxBelief(double[] _state)
+        public int GetMaxBelief(double[] state)
         {
-            var indexOfMax = 0;
-            for (var i = 0; i < _state.Length - 1; i++)
-            {
-                if (_state[i] > _state[++i])
-                {
-                    indexOfMax = i;
-                }
-            }
-            return indexOfMax;
+            var value = state.Max(s => s);
+            return state.IndexOf(value);
         }
 
         public void Run()
         {
             _observableModel.Generate();
-            var intelligentActor = _actorProvider();
-            var fixationLocation = intelligentActor.Fixate();
-            _state = _observableModel.GetState(fixationLocation);
+            var randomActor = _actorProvider();
+            var fixationLocation = randomActor.Fixate();
+            var state = _observableModel.GetState(fixationLocation);
 
-            while (_state.Any(s => s >= 0.9) == false)
+            while (state.Any(s => s >= 0.9) == false)
             {
-                _state = _observableModel.GetState(fixationLocation);
-                fixationLocation = GetMaxBelief(_state);
-                _state = _observableModel.GetState(fixationLocation);
+                fixationLocation = GetMaxBelief(state);
+                state = _observableModel.GetState(fixationLocation);
             }
         }
     }

@@ -23,7 +23,7 @@ namespace Framework.Observation
             _visualArray = _visualArrayGenerator.Generate();
             _beliefState.Initialise();
         }
-        
+
         public double[] GetState(int fixation)
         {
             var activation = _activation.GenerateActivation(fixation, _visualArray);

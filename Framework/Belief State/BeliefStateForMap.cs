@@ -23,7 +23,7 @@ namespace Framework.Belief_State
                 var discriminability =
                     new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)
                         .GenerateDiscriminabilityValue();
-                State[i] = State[i] * Math.Exp(activation[i] * discriminability);
+                State[i] = State[i]*Math.Exp(activation[i]*discriminability);
             }
             return State;
         }

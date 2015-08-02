@@ -14,9 +14,9 @@ namespace Framework
         private void Analysis_Load(object sender, EventArgs e)
         {
             //var experiment = FrameworkFactory.CreateRandomExperiment();
-            var experiment = FrameworkFactory.CreateRandomExclusionExperiment();
+            //var experiment = FrameworkFactory.CreateRandomExclusionExperiment();
             //var experiment = FrameworkFactory.CreateRandomBeliefExperiment();
-            //var experiment = FrameworkFactory.CreateMapExperiment();
+            var experiment = FrameworkFactory.CreateMapExperiment();
 
             experiment.RunTrials(100000);
 
@@ -31,7 +31,7 @@ namespace Framework
             //chart1.ChartAreas[0].AxisX.Maximum = 7;
             //chart1.ChartAreas[0].AxisY.Maximum = 350;
 
-            //chart1.Titles.Add("Average Fixations : " + FrameworkFactory.Repository.GetAverage());
+            chart1.Titles.Add("Average Fixations : " + FrameworkFactory.Repository.GetAverage());
         }
     }
 }

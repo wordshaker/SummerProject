@@ -8,9 +8,9 @@ namespace Framework
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Analysis());
+            //Application.Run(new Analysis());
             //Application.Run(new ActivationAnalysis());
-            //Application.Run(new BeliefStateAnalysis());
+            Application.Run(new BeliefStateAnalysis());
         }
     }
 }

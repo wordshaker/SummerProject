@@ -18,7 +18,7 @@ namespace Framework.Tests.TrialRunners
         private Mock<IDataRecorder> _dataRecorder;
 
         [TestFixtureSetUp]
-        public void WhenInitialisingALearningTrial()
+        public void WhenInitialisingAMapTrial()
         {
             _dataRecorder = new Mock<IDataRecorder>();
 
@@ -40,7 +40,7 @@ namespace Framework.Tests.TrialRunners
         }
 
         [Test]
-        public void ThenAnIntelligentActorFixates()
+        public void ThenARandomActorFixates()
         {
             _intelligentActor.Verify(i => i.Fixate());
         }
@@ -79,7 +79,7 @@ namespace Framework.Tests.TrialRunners
             var firstState = new[] {0.25, 0.35, 0.25, 0.1, 0.4, 0.7, 0.0};
             var secondState = new[] {0.25, 0.60, 0.25, 0.8, 0.0, 0.0, 0.0};
             var thirdState = new[] {0.25, 0.9, 0.25, 0.1, 0.0, 0.0, 0.0};
-            var stateQueue = new Queue<double[]>(new[] { firstState, secondState, thirdState });
+            var stateQueue = new Queue<double[]>(new[] {firstState, secondState, thirdState});
 
             _randomActor = new Mock<IActor>();
             _randomActor
@@ -93,12 +93,6 @@ namespace Framework.Tests.TrialRunners
 
             var trial = new MapTrialRunner(_observableModel.Object, () => _randomActor.Object, _dataRecorder.Object);
             trial.Run();
-        }
-
-        [Test]
-        public void ThenTheRandomActorIsUsedForTheFirstFixation()
-        {
-            _randomActor.Verify(a => a.Fixate());
         }
 
         [Test]
@@ -117,6 +111,12 @@ namespace Framework.Tests.TrialRunners
         public void ThenTheObservableModelIsUpdatedWithTheThirdFixation()
         {
             _observableModel.Verify(o => o.GetState(3));
+        }
+
+        [Test]
+        public void ThenTheRandomActorIsUsedForTheFirstFixation()
+        {
+            _randomActor.Verify(a => a.Fixate());
         }
 
         [Test]

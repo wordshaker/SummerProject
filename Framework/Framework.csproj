@@ -61,9 +61,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Belief State\BeliefStateForMap.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysis.cs" />
-    <Compile Include="Belief State\IBeliefStateForAnalysis.cs" />
+    <Compile Include="Belief State\BeliefStateForMap.cs" />
+    <Compile Include="Belief State\BeliefStateForMapAnalysis.cs" />
     <Compile Include="Belief State\IBeliefStateForMap.cs" />
     <Compile Include="BeliefStateAnalysis.cs">
       <SubType>Form</SubType>

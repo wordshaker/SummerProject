@@ -78,6 +78,7 @@
     <Compile Include="Observation\ObservableModelUpdateTests.cs" />
     <Compile Include="QLearningTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\MapTrialRunnerTests.cs" />
+    <Compile Include="TrialRunners\QLearningTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunnerTests.cs" />
