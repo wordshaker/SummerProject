@@ -6,13 +6,13 @@ using Framework.Observation;
 
 namespace Framework.TrialRunners
 {
-    public class RandomBeliefTrialRunner : ITrialRunner
+    public class RandomBeliefTrialRunnerWithExclusion : ITrialRunner
     {
         private readonly Func<IActor> _actorProvider;
         private readonly IObservableModel _observableModel;
         private readonly IDataRecorder _recorder;
 
-        public RandomBeliefTrialRunner(IObservableModel observableModel, Func<IActor> actorProvider,
+        public RandomBeliefTrialRunnerWithExclusion(IObservableModel observableModel, Func<IActor> actorProvider,
             IDataRecorder recorder)
         {
             _observableModel = observableModel;
@@ -26,11 +26,14 @@ namespace Framework.TrialRunners
             var actor = _actorProvider();
             var fixations = 0;
             int fixationLocation;
+            var visited = new List<int>();
 
             do
             {
                 fixationLocation = actor.Fixate();
+                if (visited.Contains(fixationLocation)) continue;
                 fixations++;
+                visited.Add(fixationLocation);
             } while (_observableModel.Update(fixationLocation) == false);
 
             _recorder.Insert(fixations);

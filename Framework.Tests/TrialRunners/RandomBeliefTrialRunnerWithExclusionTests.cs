@@ -9,7 +9,7 @@ using NUnit.Framework;
 namespace Framework.Tests.TrialRunners
 {
     [TestFixture]
-    public class RandomBeliefTrialRunnerTests
+    public class RandomBeliefTrialRunnerWithExclusionTests
     {
         private Mock<IObservableModel> _observableModel;
         private Mock<IActor> _actor;

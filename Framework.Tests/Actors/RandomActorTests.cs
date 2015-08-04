@@ -13,7 +13,7 @@ namespace Framework.Tests.Actors
         private int _randomNumber;
 
         [TestFixtureSetUp]
-        public void WhenFixating()
+        public void WhenMakingFixating()
         {
             _randomNumber = 4;
 

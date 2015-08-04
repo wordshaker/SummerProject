@@ -12,7 +12,7 @@ namespace Framework.Tests.TrialRunners
     public class QLearningTrialRunnerTests
     {
         private Mock<IMapObservableModel> _observableModel;
-        private Mock<IQLearningActor> _intelligentActor;
+        private Mock<IIntelligentActor> _intelligentActor;
         private Mock<IDataRecorder> _dataRecorder;
         private int _fixationOne;
         private double[] _firstState;
@@ -27,13 +27,13 @@ namespace Framework.Tests.TrialRunners
             var stateQueue = new Queue<double[]>(new[] {_firstState, secondState, thirdState});
 
 
-            _intelligentActor = new Mock<IQLearningActor>();
+            _intelligentActor = new Mock<IIntelligentActor>();
             _intelligentActor
                 .Setup(i => i.Fixate())
                 .Returns(_fixationOne);
 
             _intelligentActor
-                .Setup(i => i.IntelligentGuess(_firstState))
+                .Setup(i => i.IntelligentFixation(_firstState))
                 .Returns(3);
 
             _observableModel = new Mock<IMapObservableModel>();
@@ -51,7 +51,7 @@ namespace Framework.Tests.TrialRunners
         [Test]
         public void ThenIntelligentActorFixatesUsingNewInformation()
         {
-            _intelligentActor.Verify(i => i.IntelligentGuess(_firstState));
+            _intelligentActor.Verify(i => i.IntelligentFixation(_firstState));
         }
 
         [Test]

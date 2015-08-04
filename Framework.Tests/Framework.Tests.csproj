@@ -65,6 +65,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\IntelligentActorTests.cs" />
     <Compile Include="Belief State\ActivationTests.cs" />
     <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysisTest.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="TrialRunners\QLearningTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />
+    <Compile Include="TrialRunners\RandomBeliefTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunnerTests.cs" />
     <Compile Include="VisualArrayGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

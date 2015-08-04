@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actors\IIntelligentActor.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysis.cs" />
     <Compile Include="Belief State\BeliefStateForMap.cs" />
     <Compile Include="Belief State\BeliefStateForMapAnalysis.cs" />
@@ -108,8 +109,10 @@
     <Compile Include="TrialRunners\ITrialRunner.cs" />
     <Compile Include="TrialRunners\MapBubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\MapTrialRunner.cs" />
+    <Compile Include="TrialRunners\QLearningTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusion.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunner.cs" />
+    <Compile Include="TrialRunners\RandomBeliefTrialRunnerWithExclusion.cs" />
     <Compile Include="VisualArray\IVisualArrayGenerator.cs" />
     <Compile Include="Actors\RandomActor.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunner.cs" />

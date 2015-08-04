@@ -41,6 +41,13 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
+        public static Experiment CreateRandomBeliefExclusionExperiment()
+        {
+            var trialRunner = CreateRandomBeliefExclusionTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+
         public static Experiment CreateMapExperiment()
         {
             var trialRunner = CreateMapTrialRunner();
@@ -84,6 +91,12 @@ namespace Framework
         {
             var observableModel = CreateObservableModel();
             return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
+        }
+        
+        private static ITrialRunner CreateRandomBeliefExclusionTrialRunner()
+        {
+            var observableModel = CreateObservableModel();
+            return new RandomBeliefTrialRunnerWithExclusion(observableModel, CreateRandomActor, Repository);
         }
 
         private static ITrialRunner CreateMapTrialRunner()

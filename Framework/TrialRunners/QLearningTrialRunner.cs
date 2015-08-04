@@ -8,11 +8,11 @@ namespace Framework.TrialRunners
 {
     public class QLearningTrialRunner
     {
-        private readonly Func<IQLearningActor> _actorProvider;
+        private readonly Func<IIntelligentActor> _actorProvider;
         private readonly IMapObservableModel _observableModel;
         private readonly IDataRecorder _recorder;
 
-        public QLearningTrialRunner(IMapObservableModel observableModel, Func<IQLearningActor> actorProvider,
+        public QLearningTrialRunner(IMapObservableModel observableModel, Func<IIntelligentActor> actorProvider,
             IDataRecorder recorder)
         {
             _observableModel = observableModel;
@@ -31,7 +31,7 @@ namespace Framework.TrialRunners
 
             while (state.Any(s => s >= 0.9) == false)
             {
-                fixationLocation = intelligentActor.IntelligentGuess(state);
+                fixationLocation = intelligentActor.IntelligentFixation(state);
                 state = _observableModel.GetState(fixationLocation);
                 ++fixations;
             }
