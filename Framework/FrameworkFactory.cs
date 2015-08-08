@@ -47,13 +47,18 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
-
         public static Experiment CreateMapExperiment()
         {
             var trialRunner = CreateMapTrialRunner();
             return new Experiment(trialRunner);
         }
 
+        public static QLearningExperiment CreateQLearningExperiment()
+        {
+            var trialRunner = CreateQLearningTrialRunner();
+            return new QLearningExperiment(trialRunner);
+        }
+        
         //Experiments - Activation Analysis
         public static Experiment CreateRandomBeliefActivationAnalysisExperiment()
         {
@@ -104,6 +109,13 @@ namespace Framework
             var observableModel = CreateMapObservableModel();
             return new MapTrialRunner(observableModel, CreateRandomActor, Repository);
         }
+       
+        private static IQLearningTrialRunner CreateQLearningTrialRunner()
+        {
+            var observableModel = CreateMapObservableModel();
+            var randomNumberProvider = CreateRandomNumberProvider();
+            return new QLearningTrialRunner(observableModel, randomNumberProvider, Repository);
+        }
 
         //Trial Runners - Activation Analysis
         private static ITrialRunner CreateRandomBeliefActivationChartTrialRunner()
@@ -125,11 +137,15 @@ namespace Framework
             return new MapBubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
         }
 
-        //Utilities - Basic
+        //Utilities - Basic        
+        private static IRandomNumberProvider CreateRandomNumberProvider()
+        {
+            return new ZeroToSixRandomNumberProvider();
+        }
+
         private static IActor CreateRandomActor()
         {
-            var randomNumberProvider = new ZeroToSixRandomNumberProvider();
-            return new RandomActor(randomNumberProvider);
+            return new RandomActor(CreateRandomNumberProvider());
         }
 
         private static IVisualArrayGenerator CreateVisualArrayGenerator()
@@ -143,44 +159,46 @@ namespace Framework
             return new Activation(NormalDistribution.Standard);
         }
 
-        private static IObservableModel CreateObservableModel()
+        //Observable Models - Control and Trials
+        private static IObservableModelForControls CreateObservableModel()
+        {
+            var visualArrayGenerator = CreateVisualArrayGenerator();
+            var activation = CreateActivation();
+            return new ObservableModelForControls(visualArrayGenerator, new BeliefStateForControls(), activation);
+        }
+
+        private static IObservableModel CreateMapObservableModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
             return new ObservableModel(visualArrayGenerator, new BeliefState(), activation);
         }
 
-        private static IMapObservableModel CreateMapObservableModel()
+        //Observable Model - Activation
+        private static IObservableModelForControls CreateActivationObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForMap(visualArrayGenerator, new BeliefStateForMap(), activation);
-        }
-
-        private static IObservableModel CreateActivationObserverModel()
-        {
-            var visualArrayGenerator = CreateVisualArrayGenerator();
-            var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefState(), activation,
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForControls(), activation,
                 ActivationRepository);
         }
 
         //Observable Models - Belief State Analysis
-        private static IObservableModel CreateBeliefStateObserverModel()
+        private static IObservableModelForControls CreateBeliefStateObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForAnalysis(BeliefStateRepository),
+            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForControlsAnalysis(BeliefStateRepository),
                 activation,
                 ActivationRepository);
         }
 
-        private static IMapObservableModel CreateMapBeliefStateObserverModel()
+        private static IObservableModel CreateMapBeliefStateObserverModel()
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForMap(visualArrayGenerator,
-                new BeliefStateForMapAnalysis(BeliefStateRepository), activation);
+            return new ObservableModel(visualArrayGenerator,
+                new BeliefStateForAnalysis(BeliefStateRepository), activation);
         }
     }
 }

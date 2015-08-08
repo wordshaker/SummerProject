@@ -3,14 +3,14 @@ using Framework.VisualArray;
 
 namespace Framework.Observation
 {
-    public class ObservableModelForMap : IMapObservableModel
+    public class ObservableModelForControls : IObservableModelForControls
     {
         private readonly IActivation _activation;
-        private readonly IBeliefStateForMap _beliefState;
+        private readonly IBeliefStateForControls _beliefState;
         private readonly IVisualArrayGenerator _visualArrayGenerator;
         private int[] _visualArray;
 
-        public ObservableModelForMap(IVisualArrayGenerator visualArrayGenerator, IBeliefStateForMap beliefState,
+        public ObservableModelForControls(IVisualArrayGenerator visualArrayGenerator, IBeliefStateForControls beliefState,
             IActivation activation)
         {
             _visualArrayGenerator = visualArrayGenerator;
@@ -24,10 +24,10 @@ namespace Framework.Observation
             _beliefState.Initialise();
         }
 
-        public double[] GetState(int fixation)
+        public bool Update(int fixation)
         {
             var activation = _activation.GenerateActivation(fixation, _visualArray);
-            return _beliefState.CalculateState(activation, fixation);
+            return _beliefState.Update(activation, fixation);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Accord.Statistics.Distributions.Univariate;
 using Framework.Observation;
 
@@ -17,7 +16,7 @@ namespace Framework.Belief_State
             _foveaPeripheryOperatingCharacteristic = NormalDistribution.Standard;
         }
 
-        public bool Update(double[] activation, int fixation)
+        public double[] CalculateState(double[] activation, int fixation)
         {
             for (var i = 0; i < 7; i++)
             {
@@ -26,7 +25,7 @@ namespace Framework.Belief_State
                         .GenerateDiscriminabilityValue();
                 State[i] = State[i]*Math.Exp(activation[i]*discriminability);
             }
-            return State.Any(s => s >= 0.9);
+            return State;
         }
     }
 }

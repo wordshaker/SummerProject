@@ -21,6 +21,7 @@ namespace Framework.Observation
         public double GenerateDiscriminabilityValue()
         {
             var distanceFromFixation = Math.Abs(_fixation - _location);
+            //
             if (distanceFromFixation > 0)
             {
                 distanceFromFixation--;

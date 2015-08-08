@@ -4,12 +4,11 @@ using NUnit.Framework;
 namespace Framework.Tests.Belief_State
 {
     [TestFixture(true, 1, 100, 1, 0.25, 0.25, 0.25, 0.25)]
-    [TestFixture(false, 0.89, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25)]
+    [TestFixture(false, 0.1, 0.1, 0.25, 0.25, 0.25, 0.25, 0.25)]
     public class BeliefStateUpdateTests
     {
         private readonly bool _expectedResult;
         private readonly double[] _activation;
-        private BeliefState _beliefState;
         private bool _result;
 
         public BeliefStateUpdateTests(bool expectedResult, double first, double second, double third, double fourth,
@@ -23,10 +22,10 @@ namespace Framework.Tests.Belief_State
         [TestFixtureSetUp]
         public void WhenUpdating()
         {
-            _beliefState = new BeliefState();
-            _beliefState.Initialise();
+            var beliefState = new BeliefStateForControls();
+            beliefState.Initialise();
 
-            _result = _beliefState.Update(_activation, 1);
+            _result = beliefState.Update(_activation, 1);
         }
 
         [Test]

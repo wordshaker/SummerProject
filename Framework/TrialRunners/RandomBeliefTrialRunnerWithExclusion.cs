@@ -9,10 +9,10 @@ namespace Framework.TrialRunners
     public class RandomBeliefTrialRunnerWithExclusion : ITrialRunner
     {
         private readonly Func<IActor> _actorProvider;
-        private readonly IObservableModel _observableModel;
+        private readonly IObservableModelForControls _observableModel;
         private readonly IDataRecorder _recorder;
 
-        public RandomBeliefTrialRunnerWithExclusion(IObservableModel observableModel, Func<IActor> actorProvider,
+        public RandomBeliefTrialRunnerWithExclusion(IObservableModelForControls observableModel, Func<IActor> actorProvider,
             IDataRecorder recorder)
         {
             _observableModel = observableModel;

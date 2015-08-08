@@ -12,7 +12,7 @@ namespace Framework.Tests.TrialRunners
     public class MapTrialRunnerTests
     {
         private Mock<IActor> _intelligentActor;
-        private Mock<IMapObservableModel> _observableModel;
+        private Mock<IObservableModel> _observableModel;
         private int _firstFixation;
         private double[] _state;
         private Mock<IDataRecorder> _dataRecorder;
@@ -30,7 +30,7 @@ namespace Framework.Tests.TrialRunners
                 .Setup(a => a.Fixate())
                 .Returns(_firstFixation);
 
-            _observableModel = new Mock<IMapObservableModel>();
+            _observableModel = new Mock<IObservableModel>();
             _observableModel
                 .Setup(o => o.GetState(_firstFixation))
                 .Returns(_state);
@@ -68,7 +68,7 @@ namespace Framework.Tests.TrialRunners
     public class MapTrialRunnerMoreThenOneFixationTests
     {
         private Mock<IActor> _randomActor;
-        private Mock<IMapObservableModel> _observableModel;
+        private Mock<IObservableModel> _observableModel;
         private Mock<IDataRecorder> _dataRecorder;
 
         [TestFixtureSetUp]
@@ -86,7 +86,7 @@ namespace Framework.Tests.TrialRunners
                 .Setup(a => a.Fixate())
                 .Returns(4);
 
-            _observableModel = new Mock<IMapObservableModel>();
+            _observableModel = new Mock<IObservableModel>();
             _observableModel
                 .Setup(o => o.GetState(It.IsAny<int>()))
                 .Returns(stateQueue.Dequeue);

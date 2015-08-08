@@ -9,9 +9,9 @@ namespace Framework.TrialRunners
     public class MapBubbleAnalysisRunner : ITrialRunner, IMapTrialRunner
     {
         private readonly Func<IActor> _actorProvider;
-        private readonly IMapObservableModel _observableModel;
+        private readonly IObservableModel _observableModel;
 
-        public MapBubbleAnalysisRunner(IMapObservableModel observableModel, Func<IActor> actorProvider)
+        public MapBubbleAnalysisRunner(IObservableModel observableModel, Func<IActor> actorProvider)
         {
             _observableModel = observableModel;
             _actorProvider = actorProvider;

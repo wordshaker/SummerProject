@@ -1,4 +1,5 @@
-﻿using Accord.Statistics.Distributions.Univariate;
+﻿using System;
+using Accord.Statistics.Distributions.Univariate;
 using Framework.Observation;
 using Moq;
 using NUnit.Framework;
@@ -6,28 +7,28 @@ using NUnit.Framework;
 namespace Framework.Tests.Observation
 {
     [TestFixture]
-    internal class ObservationGenerationModelTests
+    public class ObservationGenerationModelTests
     {
         private Mock<NormalDistribution> _foveaPeripheryOperatingCharacteristic;
-        private int _fixation;
-        private int _location;
+        private int _distanceFromFixation;
 
         [TestFixtureSetUp]
         public void WhenDiscriminabilityValueIsNeeded()
         {
             _foveaPeripheryOperatingCharacteristic = new Mock<NormalDistribution>();
 
-            _fixation = 1;
-            _location = 4;
-            var FPOC = new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic.Object,
-                _fixation, _location);
-            FPOC.GenerateDiscriminabilityValue();
+            const int fixation = 1;
+            const int location = 4;
+            _distanceFromFixation = Math.Abs(fixation - location) - 1;
+            var fpoc = new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic.Object,
+                fixation, location);
+            fpoc.GenerateDiscriminabilityValue();
         }
 
         [Test]
         public void ThenProbabilityDensityFunctionCalled()
         {
-            _foveaPeripheryOperatingCharacteristic.Verify(f => f.ProbabilityDensityFunction(_fixation - _location));
+            _foveaPeripheryOperatingCharacteristic.Verify(f => f.ProbabilityDensityFunction(_distanceFromFixation));
         }
     }
 }

@@ -1,38 +1,39 @@
-using System;
 using System.Linq;
+using System.Threading;
 using Framework.Actors;
 using Framework.Data;
 using Framework.Observation;
+using Framework.Utilities;
 
 namespace Framework.TrialRunners
 {
-    public class QLearningTrialRunner
+    public class QLearningTrialRunner : IQLearningTrialRunner
     {
-        private readonly Func<IIntelligentActor> _actorProvider;
-        private readonly IMapObservableModel _observableModel;
+        private readonly IObservableModel _observableModel;
+        private readonly IRandomNumberProvider _randomNumberProvider;
         private readonly IDataRecorder _recorder;
 
-        public QLearningTrialRunner(IMapObservableModel observableModel, Func<IIntelligentActor> actorProvider,
+        public QLearningTrialRunner(IObservableModel observableModel, IRandomNumberProvider randomNumberProvider,
             IDataRecorder recorder)
         {
             _observableModel = observableModel;
-            _actorProvider = actorProvider;
             _recorder = recorder;
+            _randomNumberProvider = randomNumberProvider;
         }
 
-        public void Run()
+        public void Run(IQLearning learning)
         {
+            //Thread.Sleep(1);
             _observableModel.Generate();
 
-            var intelligentActor = _actorProvider();
-            var fixationLocation = intelligentActor.Fixate();
             var fixations = 1;
-            var state = _observableModel.GetState(fixationLocation);
+            var fixationLocation = _randomNumberProvider.Take();
+            var beliefState = _observableModel.GetState(fixationLocation);
+            var actor = new QLearningActor(learning, _observableModel, fixationLocation);
 
-            while (state.Any(s => s >= 0.9) == false)
+            while (beliefState.Any(s => s >= 0.9) == false)
             {
-                fixationLocation = intelligentActor.IntelligentFixation(state);
-                state = _observableModel.GetState(fixationLocation);
+                beliefState = actor.Fixate();
                 ++fixations;
             }
             _recorder.Insert(fixations);

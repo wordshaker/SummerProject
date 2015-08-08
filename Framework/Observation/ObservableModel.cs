@@ -24,10 +24,10 @@ namespace Framework.Observation
             _beliefState.Initialise();
         }
 
-        public bool Update(int fixation)
+        public double[] GetState(int fixation)
         {
             var activation = _activation.GenerateActivation(fixation, _visualArray);
-            return _beliefState.Update(activation, fixation);
+            return _beliefState.CalculateState(activation, fixation);
         }
     }
 }

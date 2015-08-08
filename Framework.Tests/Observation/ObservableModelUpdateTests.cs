@@ -12,7 +12,7 @@ namespace Framework.Tests.Observation
     {
         private bool _result;
         private readonly bool _expectedResult;
-        private Mock<IBeliefState> _beliefState;
+        private Mock<IBeliefStateForControls> _beliefState;
         private Mock<IActivation> _activation;
         private int _fixation;
         private int[] _visualArray;
@@ -30,7 +30,7 @@ namespace Framework.Tests.Observation
             _visualArray = new[] {1};
             _activationResults = new[] {2.2};
 
-            _beliefState = new Mock<IBeliefState>();
+            _beliefState = new Mock<IBeliefStateForControls>();
             _beliefState
                 .Setup(b => b.Update(It.IsAny<double[]>(), It.IsAny<int>()))
                 .Returns(_expectedResult);
@@ -45,7 +45,7 @@ namespace Framework.Tests.Observation
                 .Setup(o => o.GenerateActivation(It.IsAny<int>(), It.IsAny<int[]>()))
                 .Returns(_activationResults);
 
-            var observableModel = new ObservableModel(visualArrayGenerator.Object, _beliefState.Object,
+            var observableModel = new ObservableModelForControls(visualArrayGenerator.Object, _beliefState.Object,
                 _activation.Object);
 
             observableModel.Generate();

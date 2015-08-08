@@ -54,8 +54,9 @@
             this.chart1.Size = new System.Drawing.Size(1041, 737);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
-            // BeliefStateAnalysis
+            // BeliefStateForAnalysis
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;

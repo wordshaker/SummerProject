@@ -4,16 +4,16 @@ using Framework.VisualArray;
 
 namespace Framework.Observation
 {
-    public class ObservableModelForBubble : IObservableModel
+    public class ObservableModelForBubble : IObservableModelForControls
     {
         private readonly IActivation _activation;
         private readonly IBubbleDataRecorder _activationDataRecorder;
-        private readonly IBeliefState _beliefState;
+        private readonly IBeliefStateForControls _beliefState;
         private readonly IVisualArrayGenerator _visualArrayGenerator;
         private int _numberOfFixation;
         private int[] _visualArray;
 
-        public ObservableModelForBubble(IVisualArrayGenerator visualArrayGenerator, IBeliefState beliefState,
+        public ObservableModelForBubble(IVisualArrayGenerator visualArrayGenerator, IBeliefStateForControls beliefState,
             IActivation activation, IBubbleDataRecorder activationDataRecorder)
         {
             _visualArrayGenerator = visualArrayGenerator;

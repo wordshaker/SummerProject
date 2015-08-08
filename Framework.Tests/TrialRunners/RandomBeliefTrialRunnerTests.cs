@@ -11,7 +11,7 @@ namespace Framework.Tests.TrialRunners
     [TestFixture]
     public class RandomBeliefTrialRunnerTests
     {
-        private Mock<IObservableModel> _observableModel;
+        private Mock<IObservableModelForControls> _observableModel;
         private Mock<IActor> _actor;
         private Mock<IDataRecorder> _dataRecorder;
         private int _firstFixation;
@@ -33,7 +33,7 @@ namespace Framework.Tests.TrialRunners
                 .Setup(a => a.Fixate())
                 .Returns(() => fixationQueue.Dequeue());
 
-            _observableModel = new Mock<IObservableModel>();
+            _observableModel = new Mock<IObservableModelForControls>();
             _observableModel
                 .Setup(o => o.Update(_thirdFixation))
                 .Returns(true);

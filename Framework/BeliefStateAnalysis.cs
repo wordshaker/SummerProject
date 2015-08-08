@@ -19,7 +19,8 @@ namespace Framework
             var experiment = FrameworkFactory.CreateMapBeliefStateAnalysisExperiment();
             experiment.RunTrials(1);
 
-            var dictionary = FrameworkFactory.ActivationRepository.GetData();
+            var dictionary = FrameworkFactory.BeliefStateRepository.GetData();
+            //var dictionary = FrameworkFactory.ActivationRepository.GetData();
             var series = new Series("Belief States");
             chart1.Series.Clear();
             series.ChartType = SeriesChartType.Bubble;
@@ -47,6 +48,11 @@ namespace Framework
             chart1.ChartAreas[0].AxisY2.Title = "Belief";
 
             chart1.Titles.Add("Belief State for each location in the visual array across trials.");
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

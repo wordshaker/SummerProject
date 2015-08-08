@@ -65,7 +65,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actors\IntelligentActorTests.cs" />
+    <Compile Include="Actors\QLearningActorTests.cs" />
     <Compile Include="Belief State\ActivationTests.cs" />
     <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysisTest.cs" />
@@ -77,7 +77,7 @@
     <Compile Include="Observation\ObservationGenerationModelTests.cs" />
     <Compile Include="Observation\ObservableModelGenerateTests.cs" />
     <Compile Include="Observation\ObservableModelUpdateTests.cs" />
-    <Compile Include="QLearningTrialRunnerTests.cs" />
+    <Compile Include="QlearningExperimentTests.cs" />
     <Compile Include="TrialRunners\MapTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\QLearningTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />

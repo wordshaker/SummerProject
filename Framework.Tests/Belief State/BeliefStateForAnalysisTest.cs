@@ -6,12 +6,12 @@ using NUnit.Framework;
 namespace Framework.Tests.Belief_State
 {
     [TestFixture(true, 1, 100, 1, 0.25, 0.25, 0.25, 0.25)]
-    [TestFixture(false, 0.89, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25)]
+    [TestFixture(false, 0.1, 0.5, 0.25, 0.25, 0.25, 0.25, 0.25)]
     public class BeliefStateForAnalysisUpdateTests
     {
         private readonly bool _expectedResult;
         private readonly double[] _activation;
-        private IBeliefState _beliefState;
+        private IBeliefStateForControls _beliefState;
         private bool _result;
         private IBubbleDataRecorder _beliefStateRecorder;
 
@@ -28,7 +28,7 @@ namespace Framework.Tests.Belief_State
         public void WhenUpdating()
         {
             _beliefStateRecorder = new AnalysisDataRepository();
-            _beliefState = new BeliefStateForAnalysis(_beliefStateRecorder);
+            _beliefState = new BeliefStateForControlsAnalysis(_beliefStateRecorder);
             _beliefState.Initialise();
             _result = _beliefState.Update(_activation, 1);
         }
@@ -43,7 +43,7 @@ namespace Framework.Tests.Belief_State
     public class BeliefStateForAnalysisRecorderTests
     {
         private double[] _activation;
-        private IBeliefState _beliefState;
+        private IBeliefStateForControls _beliefState;
         private Mock<IBubbleDataRecorder> _beliefStateRecorder;
         private bool _result;
 
@@ -54,7 +54,7 @@ namespace Framework.Tests.Belief_State
             _beliefStateRecorder = new Mock<IBubbleDataRecorder>();
 
 
-            _beliefState = new BeliefStateForAnalysis(_beliefStateRecorder.Object);
+            _beliefState = new BeliefStateForControlsAnalysis(_beliefStateRecorder.Object);
             _beliefState.Initialise();
             _result = _beliefState.Update(_activation, 1);
         }

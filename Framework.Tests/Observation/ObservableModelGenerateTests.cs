@@ -10,15 +10,15 @@ namespace Framework.Tests.Observation
     public class ObservableModelGenerateTests
     {
         private Mock<IVisualArrayGenerator> _visualArrayGenerator;
-        private Mock<IBeliefState> _beliefState;
+        private Mock<IBeliefStateForControls> _beliefState;
 
         [TestFixtureSetUp]
         public void WhenGeneratingAnObservableModel()
         {
-            _beliefState = new Mock<IBeliefState>();
+            _beliefState = new Mock<IBeliefStateForControls>();
             _visualArrayGenerator = new Mock<IVisualArrayGenerator>();
 
-            var observableModel = new ObservableModel(_visualArrayGenerator.Object, _beliefState.Object, null);
+            var observableModel = new ObservableModelForControls(_visualArrayGenerator.Object, _beliefState.Object, null);
             observableModel.Generate();
         }
 

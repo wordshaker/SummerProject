@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Threading;
 using Framework.Actors;
 using Framework.Data;
 using Framework.Observation;
@@ -9,20 +9,21 @@ namespace Framework.TrialRunners
     public class RandomBeliefTrialRunner : ITrialRunner
     {
         private readonly Func<IActor> _actorProvider;
-        private readonly IObservableModel _observableModel;
+        private readonly IObservableModelForControls _observableModelForControls;
         private readonly IDataRecorder _recorder;
 
-        public RandomBeliefTrialRunner(IObservableModel observableModel, Func<IActor> actorProvider,
+        public RandomBeliefTrialRunner(IObservableModelForControls observableModelForControls, Func<IActor> actorProvider,
             IDataRecorder recorder)
         {
-            _observableModel = observableModel;
+            _observableModelForControls = observableModelForControls;
             _actorProvider = actorProvider;
             _recorder = recorder;
         }
 
         public void Run()
         {
-            _observableModel.Generate();
+            Thread.Sleep(1);
+            _observableModelForControls.Generate();
             var actor = _actorProvider();
             var fixations = 0;
             int fixationLocation;
@@ -31,7 +32,7 @@ namespace Framework.TrialRunners
             {
                 fixationLocation = actor.Fixate();
                 fixations++;
-            } while (_observableModel.Update(fixationLocation) == false);
+            } while (_observableModelForControls.Update(fixationLocation) == false);
 
             _recorder.Insert(fixations);
         }

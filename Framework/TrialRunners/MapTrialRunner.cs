@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading;
 using Accord.Math;
 using Framework.Actors;
 using Framework.Data;
@@ -10,10 +11,10 @@ namespace Framework.TrialRunners
     public class MapTrialRunner : ITrialRunner, IMapTrialRunner
     {
         private readonly Func<IActor> _actorProvider;
-        private readonly IMapObservableModel _observableModel;
+        private readonly IObservableModel _observableModel;
         private readonly IDataRecorder _recorder;
 
-        public MapTrialRunner(IMapObservableModel observableModel, Func<IActor> actorProvider, IDataRecorder recorder)
+        public MapTrialRunner(IObservableModel observableModel, Func<IActor> actorProvider, IDataRecorder recorder)
         {
             _observableModel = observableModel;
             _actorProvider = actorProvider;
@@ -28,6 +29,7 @@ namespace Framework.TrialRunners
 
         public void Run()
         {
+            Thread.Sleep(1);
             _observableModel.Generate();
 
             var randomActor = _actorProvider();
