@@ -16,7 +16,8 @@ namespace Framework
         private void BubbleChartAnalysis_Load(object sender, EventArgs e)
         {
             //var experiment = FrameworkFactory.CreateRandomBeliefBeliefStateAnalysisExperiment();
-            var experiment = FrameworkFactory.CreateMapBeliefStateAnalysisExperiment();
+            //var experiment = FrameworkFactory.CreateMapBeliefStateAnalysisExperiment();
+            var experiment = FrameworkFactory.CreateQLearningBeliefStateAnalysisExperiment();
             experiment.RunTrials(1);
 
             var dictionary = FrameworkFactory.BeliefStateRepository.GetData();

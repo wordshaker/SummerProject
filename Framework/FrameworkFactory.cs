@@ -78,6 +78,12 @@ namespace Framework
             var trialRunner = CreateMapBeliefStateAnalysisTrialRunner();
             return new Experiment(trialRunner);
         }
+        
+        public static QLearningExperiment CreateQLearningBeliefStateAnalysisExperiment()
+        {
+            var trialRunner = CreateQLearningBeliefStateAnalysisTrialRunner();
+            return new QLearningExperiment(trialRunner);
+        }
 
         //Trial Runners - Basic
         private static ITrialRunner CreateRandomTrialRunner()
@@ -137,6 +143,11 @@ namespace Framework
             return new MapBubbleAnalysisRunner(observableBeliefModel, CreateRandomActor);
         }
 
+        private static IQLearningTrialRunner CreateQLearningBeliefStateAnalysisTrialRunner()
+        {
+            var observableBeliefModel = CreateMapBeliefStateObserverModel();
+            return new QLearningBubbleAnalysisRunner(observableBeliefModel, CreateRandomNumberProvider());
+        }
         //Utilities - Basic        
         private static IRandomNumberProvider CreateRandomNumberProvider()
         {

@@ -1,6 +1,10 @@
-﻿using AForge.MachineLearning;
+﻿using System.Threading;
+using AForge.MachineLearning;
 using Framework.TrialRunners;
-
+/**
+ * QLearningWrapper wraps the QLearning Class Available in the AForge.MachineLearning Library
+ * Reference : http://www.aforgenet.com/framework/docs/html/e5835f25-ea5c-4d62-c6a3-592da5d9fa59.htm
+ */
 namespace Framework
 {
     public class QLearningExperiment
@@ -14,16 +18,20 @@ namespace Framework
 
         public void RunTrials(int numberOfTrials)
         {
-            var epsilon = 0.5;
-            var learningRate = 0.5;
-            var explorationPolicy = new EpsilonGreedyExploration(epsilon);
-            var learning = new QLearningWrapper(7, 7, explorationPolicy);
+            Thread.Sleep(1);
+            var visualArrayLength = 70; //state and action size are the size of the array in this case
+
+            var temperature = 0.1;
+
+            var boltzmannPolicy = new BoltzmannExploration(temperature);
+            var explorationPolicy = new TabuSearchExploration(visualArrayLength, boltzmannPolicy);
+            var learning = new QLearningWrapper(visualArrayLength, visualArrayLength, explorationPolicy);
+
             var count = 0;
             while (count < numberOfTrials)
             {
-                explorationPolicy.Epsilon = epsilon - ((double) count/numberOfTrials)*epsilon;
-                learning.LearningRate = learningRate - ((double) count/numberOfTrials)*learningRate;
-
+                explorationPolicy.ResetTabuList();
+                boltzmannPolicy.Temperature = temperature + ((double)count / numberOfTrials);
                 _runTrials.Run(learning);
                 count++;
             }

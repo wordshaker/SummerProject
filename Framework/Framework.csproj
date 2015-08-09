@@ -120,6 +120,7 @@
     <Compile Include="TrialRunners\ITrialRunner.cs" />
     <Compile Include="TrialRunners\MapBubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\MapTrialRunner.cs" />
+    <Compile Include="TrialRunners\QLearningBubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\QLearningTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusion.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunner.cs" />

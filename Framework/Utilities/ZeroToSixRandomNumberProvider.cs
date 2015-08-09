@@ -13,7 +13,8 @@ namespace Framework.Utilities
 
         public int Take()
         {
-            return _random.Next(0, 6);
+           // return _random.Next(0, 6);
+            return _random.Next(0, 69);
         }
     }
 }

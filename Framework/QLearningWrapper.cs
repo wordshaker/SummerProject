@@ -22,5 +22,10 @@ namespace Framework
         {
             return base.GetAction(state);
         }
+
+        public IExplorationPolicy GetPolicy()
+        {
+            return ExplorationPolicy;
+        }
     }
 }

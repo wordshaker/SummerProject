@@ -18,7 +18,7 @@ namespace Framework.Belief_State
             var activationValues = new double[visualArray.Length];
             _observationValues = GenerateObservations(fixation, visualArray);
 
-            for (var i = 0; i < 7; i++)
+            for (var i = 0; i < visualArray.Length; i++)
             {
                 var discriminability =
                     new ObservationGenerationModel(_standardDistribution, fixation, i)

@@ -1,4 +1,5 @@
-﻿using Framework.TrialRunners;
+﻿using System.Threading;
+using Framework.TrialRunners;
 
 namespace Framework
 {
@@ -13,6 +14,8 @@ namespace Framework
 
         public void RunTrials(int numberOfTrials)
         {
+            Thread.Sleep(1);
+
             var count = 0;
             while (count < numberOfTrials)
             {

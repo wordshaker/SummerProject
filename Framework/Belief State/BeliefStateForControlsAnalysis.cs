@@ -21,15 +21,18 @@ namespace Framework.Belief_State
         
         public void Initialise()
         {
-            const double oneSeventh = 1d/7d;
-            State = new[] {oneSeventh, oneSeventh, oneSeventh, oneSeventh, oneSeventh, oneSeventh, oneSeventh};
+            State = new double[70];
+            for (var i = 0; i < State.Length; i++)
+            {
+                State[i] = 1d / 7d;
+            };
             _foveaPeripheryOperatingCharacteristic = NormalDistribution.Standard;
         }
 
         public bool Update(double[] activation, int fixation)
         {
             ++ _numberOfFixation;
-            for (var i = 0; i < 7; i++)
+            for (var i = 0; i < activation.Length; i++)
             {
                 var discriminability =
                     new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)

@@ -14,7 +14,8 @@ namespace Framework.VisualArray
         public int[] Generate()
         {
             var location = _randomNumberProvider.Take();
-            var array = new[] {0, 0, 0, 0, 0, 0, 0};
+            //var array = new[] {0, 0, 0, 0, 0, 0, 0};
+            var array = new int[70];
             array[location] = 1;
             return array;
         }
