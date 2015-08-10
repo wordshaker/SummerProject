@@ -24,6 +24,7 @@ namespace Framework.TrialRunners
 
         public void Run()
         {
+            Thread.Sleep(1);
             var visualArray = _visualArrayGenerator.Generate();
             var actor = _actorProvider();
             var location = 0;

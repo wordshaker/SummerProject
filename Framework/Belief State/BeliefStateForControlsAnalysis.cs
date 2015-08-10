@@ -21,10 +21,10 @@ namespace Framework.Belief_State
         
         public void Initialise()
         {
-            State = new double[70];
+            State = new double[60];
             for (var i = 0; i < State.Length; i++)
             {
-                State[i] = 1d / 7d;
+                State[i] = 1d / 60d;
             };
             _foveaPeripheryOperatingCharacteristic = NormalDistribution.Standard;
         }

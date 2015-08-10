@@ -20,6 +20,7 @@ namespace Framework.TrialRunners
 
         public void Run(IQLearning learning)
         {
+            Thread.Sleep(1);
             _observableModel.Generate();
 
             var fixationLocation = _randomNumberProvider.Take();

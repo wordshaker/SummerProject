@@ -1,4 +1,5 @@
-﻿using Framework.Actors;
+﻿using AForge.MachineLearning;
+using Framework.Actors;
 using Framework.Observation;
 using Framework.TrialRunners;
 using Moq;
@@ -7,7 +8,7 @@ using NUnit.Framework;
 namespace Framework.Tests.Actors
 {
     [TestFixture]
-    internal class QLearningActorTests
+    public class QLearningActorTests
     {
         private static Mock<IQLearning> _learning;
         private static Mock<IObservableModel> _observableModel;
@@ -20,17 +21,21 @@ namespace Framework.Tests.Actors
         {
             _previousState = 5;
             _fixationLocation = 3;
-            _reward = 0.75;
+            _reward = -1;
 
             _observableModel = new Mock<IObservableModel>();
             _observableModel
                 .Setup(o => o.GetState(It.IsAny<int>()))
                 .Returns(new[]{ 0,0,0,_reward,0,0,0});
 
+            var tabuPolicy = new Mock<TestTabuSearchExploration>();
             _learning = new Mock<IQLearning>();
             _learning
                 .Setup(l => l.GetAction(It.IsAny<int>()))
                 .Returns(_fixationLocation);
+            _learning
+                .Setup(l => l.GetPolicy())
+                .Returns(tabuPolicy.Object);
 
             var actor = new QLearningActor(_learning.Object, _observableModel.Object, _previousState);
             actor.Fixate();
@@ -51,6 +56,14 @@ namespace Framework.Tests.Actors
         [Test] public void ThenUpdateStateIsCalLedOnQLearning()
         {
             _learning.Verify(l=> l.UpdateState(_previousState, _fixationLocation, _reward, _fixationLocation));
+        }
+    }
+
+    public class TestTabuSearchExploration : TabuSearchExploration
+    {
+        public TestTabuSearchExploration()
+            : base(60, new Mock<IExplorationPolicy>().Object)
+        {
         }
     }
 }

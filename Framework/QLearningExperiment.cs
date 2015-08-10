@@ -18,9 +18,7 @@ namespace Framework
 
         public void RunTrials(int numberOfTrials)
         {
-            Thread.Sleep(1);
-            var visualArrayLength = 70; //state and action size are the size of the array in this case
-
+            var visualArrayLength = 60; //state and action size are the size of the array in this case
             var temperature = 0.1;
 
             var boltzmannPolicy = new BoltzmannExploration(temperature);

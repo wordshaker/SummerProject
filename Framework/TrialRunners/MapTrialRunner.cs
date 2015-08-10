@@ -29,6 +29,7 @@ namespace Framework.TrialRunners
 
         public void Run()
         {
+            Thread.Sleep(1);
             _observableModel.Generate();
 
             var randomActor = _actorProvider();

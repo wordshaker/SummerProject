@@ -23,6 +23,7 @@ namespace Framework.TrialRunners
 
         public void Run(IQLearning learning)
         {
+            Thread.Sleep(1);
             _observableModel.Generate();
 
             var fixations = 1;

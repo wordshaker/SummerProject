@@ -24,7 +24,7 @@ namespace Framework.Actors
             var previousState = _fixationLocation;
             _fixationLocation = _qLearning.GetAction(_fixationLocation);
             var beliefState = _observableModel.GetState(_fixationLocation);
-            var reward = beliefState[_fixationLocation] > 0.9 ? 10 : 0;
+            var reward = beliefState[_fixationLocation] > 0.9 ? 10 : -1;
             _qLearning.UpdateState(previousState, _fixationLocation, reward, _fixationLocation);
             _tabuPolicy.SetTabuAction(_fixationLocation, 10);
             return beliefState;

@@ -22,6 +22,7 @@ namespace Framework.TrialRunners
 
         public void Run()
         {
+            Thread.Sleep(1);
             _observableModelForControls.Generate();
             var actor = _actorProvider();
             var fixations = 0;

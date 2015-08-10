@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using Framework.Actors;
 using Framework.Observation;
 
@@ -18,6 +19,7 @@ namespace Framework.TrialRunners
 
         public void Run()
         {
+            Thread.Sleep(1);
             _observableModel.Generate();
             var actor = _actorProvider();
             int fixationLocation;

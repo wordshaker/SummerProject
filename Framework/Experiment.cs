@@ -14,8 +14,6 @@ namespace Framework
 
         public void RunTrials(int numberOfTrials)
         {
-            Thread.Sleep(1);
-
             var count = 0;
             while (count < numberOfTrials)
             {

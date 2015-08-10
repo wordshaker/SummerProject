@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using AForge.MachineLearning;
 using Framework.Data;
 using Framework.Observation;
 using Framework.TrialRunners;
@@ -26,9 +27,12 @@ namespace Framework.Tests.TrialRunners
             var thirdState = new[] {0.25, 0.9, 0.25, 0.1, 0.0, 0.0, 0.0};
             var stateQueue = new Queue<double[]>(new[] {_firstState, secondState, thirdState});
 
+            var tabuPolicy = new Mock<TestTabuSearchExploration>().Object;
             _learning = new Mock<IQLearning>();
+            _learning
+                .Setup(l => l.GetPolicy())
+                .Returns(tabuPolicy);
         
-
             _randomNumberProvider = new Mock<IRandomNumberProvider>();
 
             _observableModel = new Mock<IObservableModel>();
@@ -64,6 +68,13 @@ namespace Framework.Tests.TrialRunners
         public void ThenStateGeneratedUsingFirstFixation()
         {
             _observableModel.Verify(o => o.GetState(It.IsAny<int>()));
+        }
+    }
+
+    public class TestTabuSearchExploration : TabuSearchExploration
+    {
+        public TestTabuSearchExploration() : base(1, new Mock<IExplorationPolicy>().Object)
+        {
         }
     }
 }
