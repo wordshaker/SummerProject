@@ -6,6 +6,10 @@ using Framework.Actors;
 using Framework.Data;
 using Framework.Observation;
 
+/**
+ * MAP trial runner. First fixation random, then following fixations directed by the highest belief value.
+ */
+
 namespace Framework.TrialRunners
 {
     public class MapTrialRunner : ITrialRunner, IMapTrialRunner
@@ -23,6 +27,7 @@ namespace Framework.TrialRunners
 
         public int GetMaxBelief(double[] state)
         {
+            //value = max value from the state array
             var value = state.Max(s => s);
             return state.IndexOf(value);
         }
@@ -37,6 +42,7 @@ namespace Framework.TrialRunners
             var fixations = 1;
             var state = _observableModel.GetState(fixationLocation);
 
+            // will keep looping until a value in the array reaches => 0.9
             while (state.Any(s => s >= 0.9) == false)
             {
                 fixationLocation = GetMaxBelief(state);

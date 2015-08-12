@@ -1,4 +1,6 @@
-﻿using Framework.TrialRunners;
+﻿using Framework.Data;
+using Framework.Observation;
+using Framework.Utilities;
 using Moq;
 using NUnit.Framework;
 
@@ -7,22 +9,33 @@ namespace Framework.Tests
    [TestFixture]
     public class QlearningExperimentTests
     {
-        private Mock<IQLearningTrialRunner> _trialRunner;
-        private readonly int _numberOfTrials = 3;
+        private readonly int _numberOfTrials = 200;
+       private Mock<ICumulativeDataRecorder> _dataRecorder;
 
-        [TestFixtureSetUp]
+       [TestFixtureSetUp]
         public void WhenRunTrialsIsCalled()
         {
-            _trialRunner = new Mock<IQLearningTrialRunner>();
+            _dataRecorder = new Mock<ICumulativeDataRecorder>();
 
-            var experiment = new QLearningExperiment(_trialRunner.Object);
+           var state = new double[7];
+           for (var i = 0; i < 7; i++)
+           {
+               state[i] = 0.9;
+           }
+
+           var observableModel = new Mock<IObservableModel>();
+           observableModel
+               .Setup(o => o.GetState(It.IsAny<int>()))
+               .Returns(state);
+
+           var experiment = new QLearningExperiment(observableModel.Object, new Mock<IRandomNumberProvider>().Object, _dataRecorder.Object);
             experiment.RunTrials(_numberOfTrials);
         }
 
         [Test]
-        public void ThenThreeTrialsAreRun()
+        public void ThenTheCumulativeDataRecorderIsIncrementedOnce()
         {
-            _trialRunner.Verify(t => t.Run(It.IsAny<IQLearning>()), Times.Exactly(_numberOfTrials));
+            _dataRecorder.Verify(d => d.IncrementTrial(150));
         }
     }
 }

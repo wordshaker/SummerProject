@@ -1,6 +1,10 @@
 using Framework.Belief_State;
 using Framework.VisualArray;
 
+/**
+ * Observable Models for controls trials
+ */
+
 namespace Framework.Observation
 {
     public class ObservableModelForControls : IObservableModelForControls
@@ -10,7 +14,8 @@ namespace Framework.Observation
         private readonly IVisualArrayGenerator _visualArrayGenerator;
         private int[] _visualArray;
 
-        public ObservableModelForControls(IVisualArrayGenerator visualArrayGenerator, IBeliefStateForControls beliefState,
+        public ObservableModelForControls(IVisualArrayGenerator visualArrayGenerator,
+            IBeliefStateForControls beliefState,
             IActivation activation)
         {
             _visualArrayGenerator = visualArrayGenerator;

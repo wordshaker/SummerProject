@@ -5,6 +5,11 @@ using Framework.Actors;
 using Framework.Data;
 using Framework.VisualArray;
 
+/**
+ * Actor completes if it looks directly at the target (No replacement)
+ * Fixations made randomly.
+ */
+
 namespace Framework.TrialRunners
 {
     public class RandomBasicTrialRunnerWithExclusion : ITrialRunner

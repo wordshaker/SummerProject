@@ -3,6 +3,10 @@ using System.Linq;
 using Accord.Statistics.Distributions.Univariate;
 using Framework.Observation;
 
+/**
+ * Belief State for all controls
+ */
+
 namespace Framework.Belief_State
 {
     public class BeliefStateForControls : IBeliefStateForControls
@@ -12,11 +16,13 @@ namespace Framework.Belief_State
 
         public void Initialise()
         {
-            State = new double[60];
+            //Sets prior
+            State = new double[7];
             for (var i = 0; i < State.Length; i++)
             {
-                State[i] = 1d/60d;
-            };
+                State[i] = 1d/7d;
+            }
+            ;
             _foveaPeripheryOperatingCharacteristic = NormalDistribution.Standard;
         }
 
@@ -24,9 +30,11 @@ namespace Framework.Belief_State
         {
             for (var i = 0; i < activation.Length; i++)
             {
+                //discriminability is explained in Butko and Movellan (2008) and is determined using FPOC and eccentricity from fixation.
                 var discriminability =
                     new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)
                         .GenerateDiscriminabilityValue();
+                //This is equation 6 in the Butko & Movellan (2008) paper determining belief state
                 State[i] = State[i]*Math.Exp(activation[i]*discriminability);
             }
             return State.Any(s => s >= 0.9);

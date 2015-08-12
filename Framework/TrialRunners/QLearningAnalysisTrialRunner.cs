@@ -1,29 +1,28 @@
-using System;
 using System.Linq;
 using System.Threading;
 using Framework.Actors;
+using Framework.Data;
 using Framework.Observation;
 using Framework.Utilities;
 
 /**
- * QLearning Trial Runner
- */
+ * Analysis Trial Runner for QLearning (Fixations / Trial)
+  */
 
 namespace Framework.TrialRunners
 {
-    public class QLearningTrialRunner : IQLearningTrialRunner
+    public class QLearningAnalysisTrialRunner : IQLearningTrialRunner
     {
-        //where int = fixation location
-        private readonly Func<int, IQLearningActor> _actorProvider;
         private readonly IObservableModel _observableModel;
         private readonly IRandomNumberProvider _randomNumberProvider;
+        private readonly IDataRecorder _recorder;
 
-        public QLearningTrialRunner(IObservableModel observableModel, IRandomNumberProvider randomNumberProvider,
-            Func<int, IQLearningActor> actorProvider)
+        public QLearningAnalysisTrialRunner(IObservableModel observableModel, IRandomNumberProvider randomNumberProvider,
+            IDataRecorder recorder)
         {
             _observableModel = observableModel;
+            _recorder = recorder;
             _randomNumberProvider = randomNumberProvider;
-            _actorProvider = actorProvider;
         }
 
         public void Run(IQLearning learning)
@@ -31,14 +30,16 @@ namespace Framework.TrialRunners
             Thread.Sleep(1);
             _observableModel.Generate();
 
+            var fixations = 1;
             var fixationLocation = _randomNumberProvider.Take();
             var beliefState = _observableModel.GetState(fixationLocation);
-            var actor = _actorProvider(fixationLocation);
-            //Will return true if the belief state is less than or equal to 0.9
+            var actor = new QLearningActor(learning, _observableModel, fixationLocation);
             while (beliefState.Any(s => s >= 0.9) == false)
             {
                 beliefState = actor.Fixate();
+                ++fixations;
             }
+            _recorder.Insert(fixations);
         }
     }
 }

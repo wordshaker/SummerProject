@@ -10,21 +10,23 @@ namespace Framework.Belief_State
         private readonly IBubbleDataRecorder _beliefStateDataRecorder;
         private NormalDistribution _foveaPeripheryOperatingCharacteristic;
         private int _numberOfFixation;
-        public double[] State { get; private set; }
-        
+
         public BeliefStateForAnalysis(IBubbleDataRecorder beliefStateDataRecorder)
         {
             _beliefStateDataRecorder = beliefStateDataRecorder;
             _numberOfFixation = 0;
         }
-       
+
+        public double[] State { get; private set; }
+
         public void Initialise()
         {
-            State = new double[60];
+            State = new double[7];
             for (var i = 0; i < State.Length; i++)
             {
-                State[i] = 1d / 60d;
-            };
+                State[i] = 1d/7d;
+            }
+            ;
             _foveaPeripheryOperatingCharacteristic = NormalDistribution.Standard;
         }
 
@@ -38,7 +40,7 @@ namespace Framework.Belief_State
                         .GenerateDiscriminabilityValue();
                 State[i] = State[i]*Math.Exp(activation[i]*discriminability);
             }
-            _beliefStateDataRecorder.Insert(_numberOfFixation, (double[])State.Clone());
+            _beliefStateDataRecorder.Insert(_numberOfFixation, (double[]) State.Clone());
             return State;
         }
     }

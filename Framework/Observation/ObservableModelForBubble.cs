@@ -2,6 +2,10 @@ using Framework.Belief_State;
 using Framework.Data;
 using Framework.VisualArray;
 
+/**
+ * Observable model for graphs showing belief state /activation
+ */
+
 namespace Framework.Observation
 {
     public class ObservableModelForBubble : IObservableModelForControls

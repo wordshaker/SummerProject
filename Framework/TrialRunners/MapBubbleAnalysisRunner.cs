@@ -5,6 +5,10 @@ using Accord.Math;
 using Framework.Actors;
 using Framework.Observation;
 
+/**
+ * Trial runner for MAPS bubble graphs
+ */
+
 namespace Framework.TrialRunners
 {
     public class MapBubbleAnalysisRunner : ITrialRunner, IMapTrialRunner
@@ -32,6 +36,7 @@ namespace Framework.TrialRunners
             var fixationLocation = randomActor.Fixate();
             var state = _observableModel.GetState(fixationLocation);
 
+            // While the goal hasnt been reached (any value in the state array not >= 0.9)
             while (state.Any(s => s >= 0.9) == false)
             {
                 fixationLocation = GetMaxBelief(state);

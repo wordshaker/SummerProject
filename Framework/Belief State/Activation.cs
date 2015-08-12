@@ -20,6 +20,7 @@ namespace Framework.Belief_State
 
             for (var i = 0; i < visualArray.Length; i++)
             {
+                //discriminability is explained in Butko and Movellan (2008) and is determined using FPOC and eceentricity from fixation.
                 var discriminability =
                     new ObservationGenerationModel(_standardDistribution, fixation, i)
                         .GenerateDiscriminabilityValue();
@@ -40,6 +41,7 @@ namespace Framework.Belief_State
                 }
                 else
                 {
+                    //discriminability is explained in Butko and Movellan (2008) and is determined using FPOC and eceentricity from fixation.
                     var discriminability =
                         new ObservationGenerationModel(_standardDistribution, fixation, location)
                             .GenerateDiscriminabilityValue();

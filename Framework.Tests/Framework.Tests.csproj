@@ -70,6 +70,7 @@
     <Compile Include="Belief State\BeliefStateInitialiseTests.cs" />
     <Compile Include="Belief State\BeliefStateForAnalysisTest.cs" />
     <Compile Include="Belief State\BeliefStateTests.cs" />
+    <Compile Include="DataRecorders\CumulativeDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\MemoryDataRepositoryTests.cs" />
     <Compile Include="DataRecorders\ActivationDataRepositoryTests.cs" />
     <Compile Include="Actors\RandomActorTests.cs" />
@@ -79,6 +80,7 @@
     <Compile Include="Observation\ObservableModelUpdateTests.cs" />
     <Compile Include="QlearningExperimentTests.cs" />
     <Compile Include="TrialRunners\MapTrialRunnerTests.cs" />
+    <Compile Include="TrialRunners\QLearningAnalysisTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\QLearningTrialRunnerTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusionTests.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerTests.cs" />

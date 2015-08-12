@@ -1,6 +1,10 @@
 using Framework.Belief_State;
 using Framework.VisualArray;
 
+/**
+ * Observable models for trials that arent control trials
+ */
+
 namespace Framework.Observation
 {
     public class ObservableModel : IObservableModel

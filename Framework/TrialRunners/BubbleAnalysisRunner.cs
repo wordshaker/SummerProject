@@ -4,10 +4,15 @@ using System.Threading;
 using Framework.Actors;
 using Framework.Observation;
 
+/**
+ * Trial runner for control bubble graphs
+ */
+
 namespace Framework.TrialRunners
 {
     public class BubbleAnalysisRunner : ITrialRunner
     {
+        //encapsulates the methods associated with IActor
         private readonly Func<IActor> _actorProvider;
         private readonly IObservableModelForControls _observableModel;
 

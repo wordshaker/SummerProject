@@ -2,6 +2,10 @@
 
 namespace Framework.Utilities
 {
+    /**
+     * Random Number provider used to make first random fixation
+     */
+
     public class ZeroToSixRandomNumberProvider : IRandomNumberProvider
     {
         private readonly Random _random;
@@ -13,9 +17,9 @@ namespace Framework.Utilities
 
         public int Take()
         {
-           // return _random.Next(0, 6);
+            // return _random.Next(0, 6);
             //return _random.Next(0, 69);
-            return _random.Next(0, 59);
+            return _random.Next(0, 6);
         }
     }
 }

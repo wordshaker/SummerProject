@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Framework.TrialRunners;
+﻿using Framework.TrialRunners;
 
 namespace Framework
 {

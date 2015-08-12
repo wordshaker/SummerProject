@@ -4,6 +4,10 @@ using Framework.Actors;
 using Framework.Data;
 using Framework.VisualArray;
 
+/**
+ * Actor completes if it looks directly at the target
+ */
+
 namespace Framework.TrialRunners
 {
     public class RandomBasicTrialRunner : ITrialRunner

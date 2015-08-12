@@ -25,7 +25,7 @@ namespace Framework
             var dictionary = FrameworkFactory.Repository.GetData();
             //var dictionary = memoryDataRepository.GetData();
 
-            var series = new Series("QLearning", dictionary.Count) { ChartType = SeriesChartType.Line };
+            var series = new Series("QLearning", dictionary.Count) {ChartType = SeriesChartType.Line};
             chart1.Series.Clear();
             chart1.Series.Add(series);
             chart1.Series["QLearning"].Points.DataBindXY(dictionary.Keys, dictionary.Values);

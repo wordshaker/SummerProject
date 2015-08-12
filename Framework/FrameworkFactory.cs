@@ -14,12 +14,14 @@ namespace Framework
         public static MemoryDataRepository Repository;
         public static AnalysisDataRepository ActivationRepository;
         public static AnalysisDataRepository BeliefStateRepository;
+        public static CumulativeDataRepository CumulativeRepository;
 
         static FrameworkFactory()
         {
             Repository = new MemoryDataRepository();
             ActivationRepository = new AnalysisDataRepository();
             BeliefStateRepository = new AnalysisDataRepository();
+            CumulativeRepository = new CumulativeDataRepository();
         }
 
         //Experiments - Basic
@@ -55,10 +57,11 @@ namespace Framework
 
         public static QLearningExperiment CreateQLearningExperiment()
         {
-            var trialRunner = CreateQLearningTrialRunner();
-            return new QLearningExperiment(trialRunner);
+            var observableModel = CreateMapObservableModel();
+            var randomNumberProvider = CreateRandomNumberProvider();
+            return new QLearningExperiment(observableModel, randomNumberProvider, CumulativeRepository);
         }
-        
+
         //Experiments - Activation Analysis
         public static Experiment CreateRandomBeliefActivationAnalysisExperiment()
         {
@@ -78,12 +81,12 @@ namespace Framework
             var trialRunner = CreateMapBeliefStateAnalysisTrialRunner();
             return new Experiment(trialRunner);
         }
-        
-        public static QLearningExperiment CreateQLearningBeliefStateAnalysisExperiment()
-        {
-            var trialRunner = CreateQLearningBeliefStateAnalysisTrialRunner();
-            return new QLearningExperiment(trialRunner);
-        }
+
+        //public static QLearningExperiment CreateQLearningBeliefStateAnalysisExperiment()
+        //{
+        //    var trialRunner = CreateQLearningBeliefStateAnalysisTrialRunner();
+        //    return new QLearningExperiment(trialRunner);
+        //}
 
         //Trial Runners - Basic
         private static ITrialRunner CreateRandomTrialRunner()
@@ -103,7 +106,7 @@ namespace Framework
             var observableModel = CreateObservableModel();
             return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, Repository);
         }
-        
+
         private static ITrialRunner CreateRandomBeliefExclusionTrialRunner()
         {
             var observableModel = CreateObservableModel();
@@ -114,13 +117,6 @@ namespace Framework
         {
             var observableModel = CreateMapObservableModel();
             return new MapTrialRunner(observableModel, CreateRandomActor, Repository);
-        }
-       
-        private static IQLearningTrialRunner CreateQLearningTrialRunner()
-        {
-            var observableModel = CreateMapObservableModel();
-            var randomNumberProvider = CreateRandomNumberProvider();
-            return new QLearningTrialRunner(observableModel, randomNumberProvider, Repository);
         }
 
         //Trial Runners - Activation Analysis
@@ -148,6 +144,7 @@ namespace Framework
             var observableBeliefModel = CreateMapBeliefStateObserverModel();
             return new QLearningBubbleAnalysisRunner(observableBeliefModel, CreateRandomNumberProvider());
         }
+
         //Utilities - Basic        
         private static IRandomNumberProvider CreateRandomNumberProvider()
         {
@@ -199,7 +196,8 @@ namespace Framework
         {
             var visualArrayGenerator = CreateVisualArrayGenerator();
             var activation = CreateActivation();
-            return new ObservableModelForBubble(visualArrayGenerator, new BeliefStateForControlsAnalysis(BeliefStateRepository),
+            return new ObservableModelForBubble(visualArrayGenerator,
+                new BeliefStateForControlsAnalysis(BeliefStateRepository),
                 activation,
                 ActivationRepository);
         }

@@ -5,6 +5,12 @@ using Framework.Actors;
 using Framework.Data;
 using Framework.Observation;
 
+/**
+ * Using FPOC, actor completes when =>90% certain of the targets location.
+ * Without replacement - each area of VA can only be fixated on onceS#.
+ * Fixations made randomly, but actor has more information about environment
+ */
+
 namespace Framework.TrialRunners
 {
     public class RandomBeliefTrialRunnerWithExclusion : ITrialRunner
@@ -13,7 +19,8 @@ namespace Framework.TrialRunners
         private readonly IObservableModelForControls _observableModel;
         private readonly IDataRecorder _recorder;
 
-        public RandomBeliefTrialRunnerWithExclusion(IObservableModelForControls observableModel, Func<IActor> actorProvider,
+        public RandomBeliefTrialRunnerWithExclusion(IObservableModelForControls observableModel,
+            Func<IActor> actorProvider,
             IDataRecorder recorder)
         {
             _observableModel = observableModel;

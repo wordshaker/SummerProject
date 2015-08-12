@@ -67,7 +67,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CumulativeReward.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CumulativeReward.Designer.cs">
+      <DependentUpon>CumulativeReward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ICumulativeDataRecorder.cs" />
     <Compile Include="Actors\IQLearningActor.cs" />
+    <Compile Include="Actors\QLearningTestActor.cs" />
     <Compile Include="Actors\QLearningActor.cs" />
     <Compile Include="Belief State\BeliefStateForControlsAnalysis.cs" />
     <Compile Include="Belief State\BeliefState.cs" />
@@ -99,6 +107,7 @@
     </Compile>
     <Compile Include="Data\IBubbleDataReader.cs" />
     <Compile Include="Data\IBubbleDataRecorder.cs" />
+    <Compile Include="Data\CumulativeDataRepository.cs" />
     <Compile Include="Experiment.cs" />
     <Compile Include="Observation\IObservableModel.cs" />
     <Compile Include="Observation\IObservableModelForControls.cs" />
@@ -112,6 +121,7 @@
     <Compile Include="Data\MemoryDataRepository.cs" />
     <Compile Include="FrameworkFactory.cs" />
     <Compile Include="QLearningExperiment.cs" />
+    <Compile Include="QLearningImplementation.cs" />
     <Compile Include="QLearningWrapper.cs" />
     <Compile Include="TrialRunners\BubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\IMapTrialRunner.cs" />
@@ -122,6 +132,7 @@
     <Compile Include="TrialRunners\MapTrialRunner.cs" />
     <Compile Include="TrialRunners\QLearningBubbleAnalysisRunner.cs" />
     <Compile Include="TrialRunners\QLearningTrialRunner.cs" />
+    <Compile Include="TrialRunners\QLearningAnalysisTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBasicTrialRunnerWithExclusion.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunner.cs" />
     <Compile Include="TrialRunners\RandomBeliefTrialRunnerWithExclusion.cs" />
@@ -145,6 +156,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ActivationAnalysis.resx">
       <DependentUpon>ActivationAnalysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CumulativeReward.resx">
+      <DependentUpon>CumulativeReward.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -4,6 +4,11 @@ using Framework.Actors;
 using Framework.Data;
 using Framework.Observation;
 
+/**
+ * Using FPOC, actor completes when =>90% certain of the targets location.
+ * Fixations made randomly, but actor has more information about environment
+ */
+
 namespace Framework.TrialRunners
 {
     public class RandomBeliefTrialRunner : ITrialRunner
@@ -12,7 +17,8 @@ namespace Framework.TrialRunners
         private readonly IObservableModelForControls _observableModelForControls;
         private readonly IDataRecorder _recorder;
 
-        public RandomBeliefTrialRunner(IObservableModelForControls observableModelForControls, Func<IActor> actorProvider,
+        public RandomBeliefTrialRunner(IObservableModelForControls observableModelForControls,
+            Func<IActor> actorProvider,
             IDataRecorder recorder)
         {
             _observableModelForControls = observableModelForControls;
