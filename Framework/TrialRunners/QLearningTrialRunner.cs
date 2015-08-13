@@ -17,6 +17,7 @@ namespace Framework.TrialRunners
         private readonly Func<int, IQLearningActor> _actorProvider;
         private readonly IObservableModel _observableModel;
         private readonly IRandomNumberProvider _randomNumberProvider;
+        private double _totalReward;
 
         public QLearningTrialRunner(IObservableModel observableModel, IRandomNumberProvider randomNumberProvider,
             Func<int, IQLearningActor> actorProvider)
@@ -34,8 +35,8 @@ namespace Framework.TrialRunners
             var fixationLocation = _randomNumberProvider.Take();
             var beliefState = _observableModel.GetState(fixationLocation);
             var actor = _actorProvider(fixationLocation);
-            //Will return true if the belief state is less than or equal to 0.9
-            while (beliefState.Any(s => s >= 0.9) == false)
+            
+            while (beliefState.Any(s => s >= 0.9) == false)//Will return true if the belief state is less than or equal to 0.9
             {
                 beliefState = actor.Fixate();
             }

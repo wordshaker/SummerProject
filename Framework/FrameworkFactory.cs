@@ -15,6 +15,7 @@ namespace Framework
         public static AnalysisDataRepository ActivationRepository;
         public static AnalysisDataRepository BeliefStateRepository;
         public static CumulativeDataRepository CumulativeRepository;
+        public static CumulativeEpochDataRepository CumulativeEpochRepository;
 
         static FrameworkFactory()
         {
@@ -22,6 +23,7 @@ namespace Framework
             ActivationRepository = new AnalysisDataRepository();
             BeliefStateRepository = new AnalysisDataRepository();
             CumulativeRepository = new CumulativeDataRepository();
+            CumulativeEpochRepository = new CumulativeEpochDataRepository();
         }
 
         //Experiments - Basic
@@ -60,6 +62,13 @@ namespace Framework
             var observableModel = CreateMapObservableModel();
             var randomNumberProvider = CreateRandomNumberProvider();
             return new QLearningExperiment(observableModel, randomNumberProvider, CumulativeRepository);
+        }
+
+        public static QLearningRewardAnalysis CreateQLearningAnalysisExperiment()
+        {
+            var observableModel = CreateMapObservableModel();
+            var randomNumberProvider = CreateRandomNumberProvider();
+            return new QLearningRewardAnalysis(observableModel, randomNumberProvider,  CumulativeEpochRepository);
         }
 
         //Experiments - Activation Analysis

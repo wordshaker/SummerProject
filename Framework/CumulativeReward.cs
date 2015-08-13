@@ -14,12 +14,13 @@ namespace Framework
 
         private void CumulativeReward_Load(object sender, EventArgs e)
         {
-            var experiment = FrameworkFactory.CreateQLearningExperiment();
-
+            //var experiment = FrameworkFactory.CreateQLearningExperiment();
+            var experiment = FrameworkFactory.CreateQLearningAnalysisExperiment();
             //bug means one more than you might think, multiple of 150 + 1
-            experiment.RunTrials(30001);
+            experiment.RunTrials(2000001);
 
-            var dictionary = FrameworkFactory.CumulativeRepository.GetData();
+            //var dictionary = FrameworkFactory.CumulativeRepository.GetData();
+            var dictionary = FrameworkFactory.CumulativeEpochRepository.GetData();
 
             var series = new Series("QLearning", dictionary.Count) {ChartType = SeriesChartType.Line};
             chart1.Series.Clear();
