@@ -23,7 +23,7 @@ namespace Framework
         public void RunTrials(int numberOfTrials)
         {
             var visualArrayLength = 7; //state and action size are the size of the array in this case
-            var learning = new QLearningImplementation(0.5, 1, visualArrayLength, 6);
+            var learning = new QLearningImplementation(0.5, 0.5, visualArrayLength, 6);
 
             var trainingTrialRunner = new QLearningTrialRunner(_observableModel, _randomNumberProvider,
                 fixationLocation =>

@@ -21,7 +21,7 @@ namespace Framework.Data
         public void IncrementTrial(int currentTrial)
         {
             var currentEpoch = currentTrial/150;
-            _cumulativeRewardPerEpoch.Add(currentEpoch, _cumulativeTotalReward / (currentTrial*150));
+            _cumulativeRewardPerEpoch.Add(currentEpoch, _cumulativeTotalReward / (currentEpoch * 150));
             //_cumulativeTotalReward = 0;
         }
 

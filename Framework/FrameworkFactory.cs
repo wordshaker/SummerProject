@@ -16,6 +16,7 @@ namespace Framework
         public static AnalysisDataRepository BeliefStateRepository;
         public static CumulativeDataRepository CumulativeRepository;
         public static CumulativeEpochDataRepository CumulativeEpochRepository;
+        public static PercentageCorrectDataRepository PercentageCorrectRepository;
 
         static FrameworkFactory()
         {
@@ -24,6 +25,7 @@ namespace Framework
             BeliefStateRepository = new AnalysisDataRepository();
             CumulativeRepository = new CumulativeDataRepository();
             CumulativeEpochRepository = new CumulativeEpochDataRepository();
+            PercentageCorrectRepository = new PercentageCorrectDataRepository();
         }
 
         //Experiments - Basic
@@ -57,13 +59,6 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
-        public static QLearningExperiment CreateQLearningExperiment()
-        {
-            var observableModel = CreateMapObservableModel();
-            var randomNumberProvider = CreateRandomNumberProvider();
-            return new QLearningExperiment(observableModel, randomNumberProvider, CumulativeRepository);
-        }
-
         public static QLearningRewardAnalysis CreateQLearningAnalysisExperiment()
         {
             var observableModel = CreateMapObservableModel();
@@ -91,12 +86,38 @@ namespace Framework
             return new Experiment(trialRunner);
         }
 
-        //public static QLearningExperiment CreateQLearningBeliefStateAnalysisExperiment()
-        //{
-        //    var trialRunner = CreateQLearningBeliefStateAnalysisTrialRunner();
-        //    return new QLearningExperiment(trialRunner);
-        //}
+        public static QLearningAnalysisExperiment CreateQLearningExperiment()
+        {
+            var observableModel = CreateMapObservableModel();
+            var randomNumberProvider = CreateRandomNumberProvider();
+            return new QLearningAnalysisExperiment(observableModel, randomNumberProvider, Repository);
+        }
 
+        public static Experiment CreatePercentCorrectRandomExperiment()
+        {
+            var trialRunner = CreatePercentCorrectRandomTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+
+        public static Experiment CreatePercentCorrectRandomBeliefExperiment()
+        {
+            var trialRunner = CreatePercentCorrectRandomBeliefTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+        public static Experiment CreatePercentCorrectMapExperiment()
+        {
+            var trialRunner = CreatePercentCorrectMapTrialRunner();
+            return new Experiment(trialRunner);
+        }
+
+        public static QLearningAnalysisExperiment CreatePercentCorrectQLearningExperiment()
+        {
+            var observableModel = CreateMapObservableModel();
+            var randomNumberProvider = CreateRandomNumberProvider();
+            return new QLearningAnalysisExperiment(observableModel, randomNumberProvider, PercentageCorrectRepository);
+        }        
         //Trial Runners - Basic
         private static ITrialRunner CreateRandomTrialRunner()
         {
@@ -126,6 +147,24 @@ namespace Framework
         {
             var observableModel = CreateMapObservableModel();
             return new MapTrialRunner(observableModel, CreateRandomActor, Repository);
+        }        
+
+        private static ITrialRunner CreatePercentCorrectRandomTrialRunner()
+        {
+            var visualArrayGenerator = CreateVisualArrayGenerator();
+            return new RandomBasicTrialRunner(visualArrayGenerator, CreateRandomActor, PercentageCorrectRepository);
+        }
+
+        private static ITrialRunner CreatePercentCorrectRandomBeliefTrialRunner()
+        {
+            var observableModel = CreateObservableModel();
+            return new RandomBeliefTrialRunner(observableModel, CreateRandomActor, PercentageCorrectRepository);
+        }
+        
+        private static ITrialRunner CreatePercentCorrectMapTrialRunner()
+        {
+            var observableModel = CreateMapObservableModel();
+            return new MapTrialRunner(observableModel, CreateRandomActor, PercentageCorrectRepository);
         }
 
         //Trial Runners - Activation Analysis
@@ -218,5 +257,8 @@ namespace Framework
             return new ObservableModel(visualArrayGenerator,
                 new BeliefStateForAnalysis(BeliefStateRepository), activation);
         }
+
+
+
     }
 }

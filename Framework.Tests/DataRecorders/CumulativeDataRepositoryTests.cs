@@ -38,7 +38,7 @@ namespace Framework.Tests.DataRecorders
         [Test]
         public void ThenTheDictionaryHasTheExpectedValue()
         {
-            Assert.That(_cumulativeRewardPerTestTrial.Values.First(), Is.EqualTo(_reward));
+            Assert.That(_cumulativeRewardPerTestTrial.Values.First(), Is.EqualTo(0));
         }
     }
 
@@ -84,13 +84,13 @@ namespace Framework.Tests.DataRecorders
         [Test]
         public void ThenDictionaryHasTheExpectedValueForFirstFixation()
         {
-            Assert.That(_cumulativeRewardPerTestTrial[_firstTrial/150], Is.EqualTo(_rewardOne));
+            Assert.That(_cumulativeRewardPerTestTrial[_firstTrial/150], Is.EqualTo(0));
         }
 
         [Test]
         public void ThenDictionaryHasTheExpectedValueForSecondFixation()
         {
-            Assert.That(_cumulativeRewardPerTestTrial[_secondTrial/150], Is.EqualTo(_rewardTwo));
+            Assert.That(_cumulativeRewardPerTestTrial[_secondTrial/150], Is.EqualTo(_rewardOne));
         }
 
         [Test]

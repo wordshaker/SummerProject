@@ -11,7 +11,8 @@ namespace Framework
             //Application.Run(new Analysis());
             //Application.Fixate(new ActivationAnalysis());
             //Application.Run(new BeliefStateAnalysis());
-            Application.Run(new CumulativeReward());
+            //Application.Run(new CumulativeReward());
+            Application.Run(new PercentageCorrectAnalysis());
         }
     }
 }

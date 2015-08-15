@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -20,12 +21,13 @@ namespace Framework
             //var experiment = FrameworkFactory.CreateRandomBeliefExclusionExperiment();
             //var experiment = FrameworkFactory.CreateMapExperiment();
             var experiment = FrameworkFactory.CreateQLearningExperiment();
-            experiment.RunTrials(100000);
+            //experiment.RunTrials(100);
+            experiment.RunTrials(100,100);
 
             var dictionary = FrameworkFactory.Repository.GetData();
-            //var dictionary = memoryDataRepository.GetData();
 
             var series = new Series("QLearning", dictionary.Count) {ChartType = SeriesChartType.Line};
+
             chart1.Series.Clear();
             chart1.Series.Add(series);
             chart1.Series["QLearning"].Points.DataBindXY(dictionary.Keys, dictionary.Values);

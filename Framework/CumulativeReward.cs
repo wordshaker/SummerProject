@@ -17,7 +17,7 @@ namespace Framework
             //var experiment = FrameworkFactory.CreateQLearningExperiment();
             var experiment = FrameworkFactory.CreateQLearningAnalysisExperiment();
             //bug means one more than you might think, multiple of 150 + 1
-            experiment.RunTrials(2000001);
+            experiment.RunTrials(300001);
 
             //var dictionary = FrameworkFactory.CumulativeRepository.GetData();
             var dictionary = FrameworkFactory.CumulativeEpochRepository.GetData();
@@ -26,6 +26,8 @@ namespace Framework
             chart1.Series.Clear();
             chart1.Series.Add(series);
             chart1.Series["QLearning"].Points.DataBindXY(dictionary.Keys, dictionary.Values);
+            
+            //E1 - Crimson E0.5- Dark Blue E0 - Dark Green
             chart1.Series[0].Color = Color.DarkBlue;
             chart1.ChartAreas[0].AxisX.Title = "Total Epochs";
             chart1.ChartAreas[0].AxisY.Title = "Cumulative Reward";
