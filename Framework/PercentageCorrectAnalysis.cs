@@ -20,13 +20,13 @@ namespace Framework
 
         private void PercentageCorrectAnalysis_Load(object sender, EventArgs e)
         {
-            var experiment = FrameworkFactory.CreatePercentCorrectRandomExperiment();
+            //var experiment = FrameworkFactory.CreatePercentCorrectRandomExperiment();
             //var experiment = FrameworkFactory.CreatePercentCorrectRandomBeliefExperiment();
             //var experiment = FrameworkFactory.CreatePercentCorrectMapExperiment();
-            //var experiment = FrameworkFactory.CreatePercentCorrectQLearningExperiment();
+            var experiment = FrameworkFactory.CreatePercentCorrectQLearningExperiment();
 
-            experiment.RunTrials(1000);
-            //experiment.RunTrials(1000,1000);
+            //experiment.RunTrials(100000);
+            experiment.RunTrials(100000,100000);
 
             var dictionary = FrameworkFactory.PercentageCorrectRepository.GetData();
 
@@ -36,7 +36,7 @@ namespace Framework
             chart1.Series.Add(series);
             chart1.Series["QLearning"].Points.DataBindXY(dictionary.Keys, dictionary.Values);
             // Basic = red, Belief = Blue, MAP = Purple, QLearning = Green
-            chart1.Series[0].Color = Color.DarkBlue;
+            chart1.Series[0].Color = Color.DarkGreen;
             chart1.ChartAreas[0].AxisX.Title = "No. Of Fixations";
             chart1.ChartAreas[0].AxisY.Title = "Total Trials";
             chart1.ChartAreas[0].AxisX.Maximum = 12;

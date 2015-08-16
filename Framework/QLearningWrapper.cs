@@ -2,8 +2,7 @@
 using Framework.TrialRunners;
 
 /*
- * QLearning and IExplorationPolicy from:
- * http://www.aforgenet.com/framework/docs/html/5b599b12-9e4b-9d0c-40e4-88cec36b9327.htm
+ * Need to change this to an interface and delete QLearning Class
  */
 
 namespace Framework

@@ -13,11 +13,9 @@ namespace Framework.TrialRunners
 {
     public class QLearningTrialRunner : IQLearningTrialRunner
     {
-        //where int = fixation location
-        private readonly Func<int, IQLearningActor> _actorProvider;
+        private readonly Func<int, IQLearningActor> _actorProvider;//where int = fixation location
         private readonly IObservableModel _observableModel;
         private readonly IRandomNumberProvider _randomNumberProvider;
-        private double _totalReward;
 
         public QLearningTrialRunner(IObservableModel observableModel, IRandomNumberProvider randomNumberProvider,
             Func<int, IQLearningActor> actorProvider)

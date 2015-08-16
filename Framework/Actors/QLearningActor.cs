@@ -13,7 +13,6 @@ namespace Framework.Actors
         private readonly IObservableModel _observableModel;
         private readonly IQLearning _qLearning;
         private int _fixationLocation;
-        private int _totalReward;
         
 
         public QLearningActor(IQLearning qLearning, IObservableModel observableModel, int fixationLocation)
