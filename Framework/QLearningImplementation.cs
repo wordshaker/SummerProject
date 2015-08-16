@@ -14,86 +14,17 @@ namespace Framework
         {
             _epsilon = epsilon;
             _gamma = gamma;
-            _q = new Dictionary<int, Dictionary<int, double>>(states)
+            _q = new Dictionary<int, Dictionary<int, double>>(states);
+            for (var i = 0; i < states; i++)
             {
+                var actionRewards = new Dictionary<int, double>(actions);
+                for (var j = 0; j < states; j++)
                 {
-                    0, new Dictionary<int, double>(actions)
-                    {
-                        {1, 0},
-                        {2, 0},
-                        {3, 0},
-                        {4, 0},
-                        {5, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    1, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {2, 0},
-                        {3, 0},
-                        {4, 0},
-                        {5, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    2, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {1, 0},
-                        {3, 0},
-                        {4, 0},
-                        {5, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    3, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {1, 0},
-                        {2, 0},
-                        {4, 0},
-                        {5, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    4, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {1, 0},
-                        {2, 0},
-                        {3, 0},
-                        {5, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    5, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {1, 0},
-                        {2, 0},
-                        {3, 0},
-                        {4, 0},
-                        {6, 0},
-                    }
-                },
-                {
-                    6, new Dictionary<int, double>(actions)
-                    {
-                        {0, 0},
-                        {1, 0},
-                        {2, 0},
-                        {3, 0},
-                        {4, 0},
-                        {5, 0},
-                    }
-                },
-            };
+                    if (j == i) continue;
+                    actionRewards.Add(j, 0);
+                }
+                _q.Add(i, actionRewards);
+            }
         }
 
         public void Reward(int oldState, int actionTaken, double reward, int newState)

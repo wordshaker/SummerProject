@@ -45,11 +45,9 @@ namespace Framework.Belief_State
                 var discriminability =
                     new ObservationGenerationModel(_foveaPeripheryOperatingCharacteristic, fixation, i)
                         .GenerateDiscriminabilityValue();
-                //This is equation 6 in the Butko & Movellan (2008) paper determining belief state
-                State[i] = State[i]*Math.Exp(activation[i]*discriminability);
+               State[i] = State[i]*Math.Exp(activation[i]*discriminability); //This is equation 6 in the Butko & Movellan (2008) paper determining belief state
             }
-            //Stores belief states for output onto graph
-            _beliefStateDataRecorder.Insert(_numberOfFixation, (double[]) State.Clone());
+            _beliefStateDataRecorder.Insert(_numberOfFixation, (double[]) State.Clone());//Stores belief states for output onto graph
             return State.Any(s => s >= 0.9);
         }
     }

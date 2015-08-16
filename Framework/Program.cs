@@ -9,10 +9,10 @@ namespace Framework
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Analysis());
-            //Application.Fixate(new ActivationAnalysis());
+            //Application.Run(new ActivationAnalysis());
             //Application.Run(new BeliefStateAnalysis());
-            //Application.Run(new CumulativeReward());
-            Application.Run(new PercentageCorrectAnalysis());
+            Application.Run(new CumulativeReward());
+            //Application.Run(new PercentageCorrectAnalysis());
         }
     }
 }
